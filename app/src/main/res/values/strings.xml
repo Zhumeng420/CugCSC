@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">CugCSC</string>
+    <string name="home">主页</string>
+    <string name="library">资源</string>
+    <string name="message">消息</string>
+    <string name="mine">我的</string>
+    <string name="serach">搜   索</string>
+</resources>
