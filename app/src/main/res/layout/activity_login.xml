@@ -24,9 +24,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="18dp"
+            android:layout_marginLeft="35dp"
             android:gravity="center"
-            android:text="欢迎来到CUG学生服务中心"
+            android:text="CUG学生服务中心"
             android:textColor="#353535"
             android:textSize="26sp" />
     </RelativeLayout>
@@ -172,12 +172,13 @@
             android:text="注册账号"
             android:textColor="#4C96D1"
             android:textSize="16sp" />
+
         <TextView
             android:id="@+id/code_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="235dp"
+            android:layout_marginStart="190dp"
             android:text="验证码登录"
             android:textColor="#4C96D1"
             android:textSize="16sp" />
