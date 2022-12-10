@@ -1,18 +1,26 @@
 package com.example.cugcsc;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
+import com.example.cugcsc.UserCenter.GlobalUserState;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-public class MineActivity extends AppCompatActivity {
+import java.util.Objects;
 
+public class MineActivity extends AppCompatActivity implements View.OnClickListener {
+    private RelativeLayout UserInfo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,5 +51,33 @@ public class MineActivity extends AppCompatActivity {
                 return false;
             }
         });
+        /**********登录/个人信息模块************/
+        UserInfo=findViewById(R.id.user_info);
+        UserInfo.setOnClickListener(this);//监听点击事件
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.user_info:{//个人信息模块被点击
+                /*******登录状态判断*******/
+                if(Objects.equals(GlobalUserState.UserPhone, "")){//如果用户没用登录，则跳转到登录界面
+                    Intent intent=new Intent();
+                    intent.setClass(MineActivity.this,LoginActivity.class);
+                    startActivityForResult(intent,0x001);
+                    break;
+                }
+            }
+        }
+    }
+
+    @SuppressLint({"SetTextI18n", "Range"})
+    @Override
+    public void onActivityResult(int requestCode,int resultCode,Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==0x001&resultCode==0x002) {
+
+        }
     }
 }

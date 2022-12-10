@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity"
+    android:background="@drawable/login_background"
+    android:id="@+id/backgorund">
+
+    <RelativeLayout
+        android:id="@+id/login_backgorund1"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="180dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/edittext_shape03"
+        android:clickable="true"
+        android:paddingLeft="12dp">
+
+        <TextView
+            android:id="@+id/login_welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="18dp"
+            android:gravity="center"
+            android:text="欢迎来到CUG学生服务中心"
+            android:textColor="#353535"
+            android:textSize="26sp" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/login_backgorund2"
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="240dp"
+        android:layout_marginEnd="30dp"
+        android:background="#E1DFDF"
+        android:clickable="true"
+        android:paddingLeft="12dp"></RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/login_backgorund3"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="255dp"
+        android:layout_marginEnd="30dp"
+        android:background="#E1DFDF"
+        android:clickable="true"
+        android:paddingLeft="12dp">
+
+        <EditText
+            android:id="@+id/user_phone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/edittext_shape02"
+            android:hint="请输入手机号"
+            android:inputType="number"
+            android:maxLength="11"
+            android:paddingStart="30dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray"
+            android:textSize="16sp"
+            tools:ignore="TextFields" />
+        <ImageView
+            android:layout_width="80px"
+            android:layout_height="80px"
+            android:src="@drawable/user2"
+            android:padding="15px"
+            android:layout_alignBottom="@id/user_phone"
+            android:layout_alignLeft="@id/user_phone"
+            android:layout_alignStart="@id/user_phone"
+            android:layout_alignTop="@id/user_phone"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/login_backgorund4"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="304dp"
+        android:layout_marginEnd="30dp"
+        android:background="#E1DFDF"
+        android:clickable="true"
+        android:paddingLeft="12dp">
+
+        <EditText
+            android:id="@+id/user_password"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/edittext_shape02"
+            android:hint="请输入密码"
+            android:maxLength="11"
+            android:paddingStart="30dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray"
+            android:textSize="16sp"
+            tools:ignore="TextFields" />
+        <ImageView
+            android:layout_width="80px"
+            android:layout_height="80px"
+            android:src="@drawable/password"
+            android:padding="15px"
+            android:layout_alignBottom="@id/user_password"
+            android:layout_alignLeft="@id/user_password"
+            android:layout_alignStart="@id/user_password"
+            android:layout_alignTop="@id/user_password"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlogin_backgorund6"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="354dp"
+        android:layout_marginEnd="30dp"
+        android:background="#E1DFDF"
+        android:clickable="true"
+        android:paddingLeft="12dp">
+
+        <android.widget.Button
+            android:id="@+id/login"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="15dp"
+            android:textSize="22sp"
+            android:textColor="@color/white"
+            android:background="@drawable/color_button"
+            android:text="登     录" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/login_backgorund7"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="403dp"
+        android:layout_marginEnd="30dp"
+        android:background="#E1DFDF"
+        android:clickable="true"
+        android:paddingLeft="12dp"></RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/login_backgorund8"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="447dp"
+        android:layout_marginEnd="30dp"
+
+        android:clickable="true"
+        android:paddingLeft="12dp"
+        android:background="@drawable/edittext_shape04">
+        <TextView
+            android:id="@+id/register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="20dp"
+            android:text="注册账号"
+            android:textColor="#4C96D1"
+            android:textSize="16sp" />
+        <TextView
+            android:id="@+id/code_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="235dp"
+            android:text="验证码登录"
+            android:textColor="#4C96D1"
+            android:textSize="16sp" />
+    </RelativeLayout>
+</RelativeLayout>

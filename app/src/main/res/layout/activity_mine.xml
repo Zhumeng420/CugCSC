@@ -8,6 +8,7 @@
     android:orientation="vertical">
 
     <RelativeLayout
+        android:id="@+id/user_info"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginBottom="18dp"
@@ -89,12 +90,6 @@
             android:text="@string/pulish"
             android:textColor="#353535"
             android:textSize="16sp" />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.2dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginRight="12dp"
-            android:background="#dadada" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -122,6 +117,12 @@
             android:text="@string/blog_manage"
             android:textColor="#353535"
             android:textSize="16sp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="50dp"
+            android:background="#66A19E9E" />
     </RelativeLayout>
 
     <RelativeLayout
