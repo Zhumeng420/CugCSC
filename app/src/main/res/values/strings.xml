@@ -5,4 +5,9 @@
     <string name="message">消息</string>
     <string name="mine">我的</string>
     <string name="serach">搜   索</string>
+    <string name="logout">退出登录</string>
+    <string name="pulish">内容发布</string>
+    <string name="blog_manage">内容管理</string>
+    <string name="file_manager">云盘管理</string>
+    <string name="user_name">用户名：</string>
 </resources>

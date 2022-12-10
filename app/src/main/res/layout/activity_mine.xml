@@ -8,7 +8,6 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:id="@+id/re_myinfo"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginBottom="18dp"
@@ -17,41 +16,39 @@
         android:paddingTop="8dp"
         android:paddingBottom="8dp">
         <ImageView
-            android:id="@+id/iv_avatar"
+            android:id="@+id/user_head"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_marginLeft="15dp"
-            android:src="@drawable/home" />
+            android:src="@drawable/user" />
         <LinearLayout
-            android:id="@+id/ll_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="12dp"
-            android:layout_toRightOf="@id/iv_avatar"
+            android:layout_toRightOf="@id/user_head"
             android:orientation="horizontal">
             <TextView
-                android:id="@+id/tv_name"
+                android:id="@+id/user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="用户名："
+                android:text="@string/user_name"
                 android:textColor="#353535"
                 android:textSize="16sp" />
             <TextView
-                android:id="@+id/yonghuxingming"
+                android:id="@+id/user_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#353535"
                 android:textSize="16sp" />
         </LinearLayout>
         <TextView
-            android:id="@+id/tv_fxid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="16dp"
             android:layout_marginBottom="10dp"
-            android:layout_toRightOf="@id/iv_avatar"
+            android:layout_toRightOf="@id/user_head"
             android:text="账号:"
             android:textColor="#AAAAAA"
             android:textSize="14sp" />
@@ -62,7 +59,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="55dp"
             android:layout_marginBottom="10dp"
-            android:layout_toRightOf="@id/iv_avatar"
+            android:layout_toRightOf="@id/user_head"
             android:textColor="#AAAAAA"
             android:textSize="14sp" />
     </RelativeLayout>
@@ -82,14 +79,14 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="12dp"
-            android:src="@drawable/home"/>
+            android:src="@drawable/post"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginStart="20dp"
             android:layout_toEndOf="@id/iv_xiangce"
-            android:text="照片上传"
+            android:text="@string/pulish"
             android:textColor="#353535"
             android:textSize="16sp" />
         <View
@@ -115,14 +112,14 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="12dp"
-            android:src="@drawable/home"/>
+            android:src="@drawable/blog"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
             android:layout_toRightOf="@id/iv_shoucang"
-            android:text="关于我们"
+            android:text="@string/blog_manage"
             android:textColor="#353535"
             android:textSize="16sp" />
     </RelativeLayout>
@@ -142,14 +139,14 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="12dp"
-            android:src="@drawable/home" />
+            android:src="@drawable/cloud" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
             android:layout_toRightOf="@id/iv_money_bag"
-            android:text="帮助与反馈"
+            android:text="@string/file_manager"
             android:textColor="#353535"
             android:textSize="16sp" />
         <View
@@ -161,7 +158,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_marginTop="305dp"
+        android:layout_marginTop="315dp"
         android:id="@+id/tuichu"
         android:layout_width="match_parent"
         android:background="#FFFFFF"
@@ -175,14 +172,14 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="12dp"
-            android:src="@drawable/home" />
+            android:src="@drawable/logout" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
-            android:layout_toRightOf="@id/iv_setting"
-            android:text="退出登入"
+            android:layout_marginStart="20dp"
+            android:layout_toEndOf="@id/iv_setting"
+            android:text="@string/logout"
             android:textColor="#353535"
             android:textSize="16sp" />
     </RelativeLayout>
