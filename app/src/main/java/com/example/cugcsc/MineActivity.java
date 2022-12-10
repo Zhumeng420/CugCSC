@@ -19,7 +19,7 @@ public class MineActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mine);
         /*******底部导航栏*********/
         BottomNavigationView bottomNavigationView=findViewById(R.id.botton_navigation);//定位底部导航栏
-        bottomNavigationView.setSelectedItemId(R.id.home);//默认选择主页
+        bottomNavigationView.setSelectedItemId(R.id.mine);//默认选择主页
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @SuppressLint("NonConstantResourceId")
             @Override
@@ -30,11 +30,11 @@ public class MineActivity extends AppCompatActivity {
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.library:
-                        startActivity(new Intent(getApplicationContext(),MineActivity.class));
+                        startActivity(new Intent(getApplicationContext(),LibraryActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.message:
-                        startActivity(new Intent(getApplicationContext(),MineActivity.class));
+                        startActivity(new Intent(getApplicationContext(),MessageActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.mine:

@@ -34,11 +34,11 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.home:
                         return true;
                     case R.id.library:
-                        startActivity(new Intent(getApplicationContext(),MineActivity.class));
+                        startActivity(new Intent(getApplicationContext(),LibraryActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.message:
-                        startActivity(new Intent(getApplicationContext(),MineActivity.class));
+                        startActivity(new Intent(getApplicationContext(),MessageActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.mine:
