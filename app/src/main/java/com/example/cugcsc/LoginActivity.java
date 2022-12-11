@@ -1,30 +1,25 @@
 package com.example.cugcsc;
 
-import androidx.appcompat.app.AppCompatActivity;
+import static com.example.cugcsc.tool.toast.ErrorToast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
+import com.example.cugcsc.UserCenter.login.Async.LoginAsyncTaskByPassword;
 
-import com.example.cugcsc.UserCenter.GlobalUserState;
-
-import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
-    Button Login;
-    EditText Phone;
-    EditText Password;
-    TextView Register;
-    TextView CodeLogin;
+    private Button Login;
+    private EditText Phone;
+    private EditText Password;
+    private TextView Register;
+    private TextView CodeLogin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,21 +59,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.login:{//个人信息模块被点击
                 /*******账号密码合法性校验*******/
                 if(Phone.getText().toString().length()!=11){
-                    //Toast.makeText(this, "手机号格式不正确", Toast.LENGTH_SHORT).show();
-
-                    Toast toast2=new Toast(this);
-                    LayoutInflater inflater=LayoutInflater.from(this);
-                    View view=inflater.inflate(R.layout.toast, null);
-                    ImageView imageview= (ImageView) view.findViewById(R.id.tip_img);
-                    TextView textview= (TextView) view.findViewById(R.id.tip_info);
-                    imageview.setImageResource(R.drawable.home);
-                    textview.setText("hello");
-                    toast2.setView(view);
-                    toast2.setGravity(Gravity.TOP, 0, 50);
-                    toast2.setDuration(Toast.LENGTH_SHORT);//显示的时间长短
-                    toast2.show();
+                    ErrorToast(this,"手机号码格式错误");
+                }else if(Password.getText().toString().length()<8){//密码长度必须大于8位
+                    ErrorToast(this,"密码错误");
+                }else {//否则到数据库查询
+                    /***********以下到异步执行登录操作，同时加载动画****************/
+                    LoginAsyncTaskByPassword task=new LoginAsyncTaskByPassword(this);
+                    System.out.println(Phone.getText().toString());
+                    task.execute(Phone.getText().toString(),Password.getText().toString());
                 }
             }
         }
     }
+
+
 }

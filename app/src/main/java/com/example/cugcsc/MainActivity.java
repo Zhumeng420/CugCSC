@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        /********搜索按钮*********/
+        /********搜索按钮更改字体*********/
         Button SearchButton=findViewById(R.id.search_button);
         Typeface type = Typeface.createFromAsset(getAssets(),"search.otf" );//设置按钮字体
         SearchButton.setTypeface(type);

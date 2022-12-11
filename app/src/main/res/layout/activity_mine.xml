@@ -35,15 +35,10 @@
                 android:layout_height="wrap_content"
                 android:text="@string/user_name"
                 android:textColor="#353535"
-                android:textSize="16sp" />
-            <TextView
-                android:id="@+id/user_phone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#353535"
-                android:textSize="16sp" />
+                android:textSize="23sp" />
         </LinearLayout>
         <TextView
+            android:id="@+id/user_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

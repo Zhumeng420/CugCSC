@@ -6,12 +6,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.cugcsc.UserCenter.GlobalUserState;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -21,6 +23,9 @@ import java.util.Objects;
 
 public class MineActivity extends AppCompatActivity implements View.OnClickListener {
     private RelativeLayout UserInfo;
+    private ImageView UserHead;
+    private TextView UserName;
+    private TextView UserPhone;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,8 +81,16 @@ public class MineActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onActivityResult(int requestCode,int resultCode,Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==0x001&resultCode==0x002) {
-
+        if(requestCode==0x001&resultCode==0x002) {//登录完成后跳转回主页
+            UserHead=findViewById(R.id.user_head);
+            UserName=findViewById(R.id.user_name);
+            UserPhone=findViewById(R.id.user_phone);
+            UserName.setText(GlobalUserState.UserName);
+            UserPhone.setText("账号："+GlobalUserState.UserPhone);
+            Typeface type = Typeface.createFromAsset(getAssets(),"login.ttf" );//设置按钮字体
+            UserName.setTypeface(type);
+            //GetHeadByAsyc task=new GetHeadByAsyc(head);
+            //task.execute(user.url);
         }
     }
 }
