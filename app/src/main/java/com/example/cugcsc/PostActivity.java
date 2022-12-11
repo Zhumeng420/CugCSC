@@ -1,38 +1,38 @@
 package com.example.cugcsc;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.graphics.Typeface;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
+
+import com.example.cugcsc.UserCenter.GlobalUserState;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity {
+public class PostActivity extends AppCompatActivity  implements View.OnClickListener {
+    private LinearLayout BackMine;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        /********搜索按钮更改字体*********/
-        Button SearchButton=findViewById(R.id.search_button);
-        Typeface type = Typeface.createFromAsset(getAssets(),"search.otf" );//设置按钮字体
-        SearchButton.setTypeface(type);
+        setContentView(R.layout.activity_post);
         /*******底部导航栏*********/
         BottomNavigationView bottomNavigationView=findViewById(R.id.botton_navigation);//定位底部导航栏
-        bottomNavigationView.setSelectedItemId(R.id.home);//默认选择主页
+        bottomNavigationView.setSelectedItemId(R.id.mine);//默认选择主页
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @SuppressLint("NonConstantResourceId")
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem){
                 switch (menuItem.getItemId()){
                     case R.id.home:
+                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                        overridePendingTransition(0,0);
                         return true;
                     case R.id.library:
                         startActivity(new Intent(getApplicationContext(),LibraryActivity.class));
@@ -43,23 +43,29 @@ public class MainActivity extends AppCompatActivity {
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.mine:
-                        startActivity(new Intent(getApplicationContext(),MineActivity.class));
-                        overridePendingTransition(0,0);
                         return true;
                 }
                 return false;
             }
         });
-        /*********设置背景图片透明度*********/
-        View v = findViewById(R.id.main_background);
-        v.getBackground().setAlpha(200);//0~255透明度值 ，0为完全透明，255为不透明
-        v = findViewById(R.id.serach_view);
-        v.getBackground().setAlpha(0);//0~255透明度值 ，0为完全透明，255为不透明
-        v = findViewById(R.id.search_context);
-        v.getBackground().setAlpha(200);//0~255透明度值 ，0为完全透明，255为不透明
-        v = findViewById(R.id.search_button);
-        v.getBackground().setAlpha(40);//0~255透明度值 ，0为完全透明，255为不透明
-        v = findViewById(R.id.content_view);
-        v.getBackground().setAlpha(200);//0~255透明度值 ，0为完全透明，255为不透明
+        /************返回个人中心***************/
+        BackMine=findViewById(R.id.back_mine);
+        BackMine.setOnClickListener(this);//监听点击事件
     }
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.back_mine:{//返回按钮被点击
+                /*******登录状态判断*******/
+                if(Objects.equals(GlobalUserState.UserPhone, "")){
+                    finish();//直接结束当前页面生命周期
+                    break;
+                }else{//否则跳转到个人中心编辑界面
+
+                }
+            }
+
+        }
+    }
+
 }

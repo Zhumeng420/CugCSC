@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#51CCCCCC"
+    android:background="#51DFDEDE"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -71,7 +71,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/re_xiangce"
+        android:id="@+id/post"
         android:layout_marginTop="110dp"
         android:layout_width="match_parent"
         android:layout_height="65dp"
@@ -79,7 +79,7 @@
         android:clickable="true"
         android:paddingLeft="12dp">
         <ImageView
-            android:id="@+id/post"
+            android:id="@+id/post2"
             android:layout_width="26dp"
             android:layout_height="26dp"
             android:layout_alignParentLeft="true"
@@ -91,7 +91,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginStart="20dp"
-            android:layout_toEndOf="@id/post"
+            android:layout_toEndOf="@id/post2"
             android:text="@string/pulish"
             android:textColor="#353535"
             android:textSize="16sp" />

@@ -27,6 +27,7 @@ public class MineActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView UserHead;
     private TextView UserName;
     private TextView UserPhone;
+    private RelativeLayout Post;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +61,9 @@ public class MineActivity extends AppCompatActivity implements View.OnClickListe
         /**********登录/个人信息模块************/
         UserInfo=findViewById(R.id.user_info);
         UserInfo.setOnClickListener(this);//监听点击事件
+        /**********发布模块被点击************/
+        Post=findViewById(R.id.post);
+        Post.setOnClickListener(this);
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -73,7 +77,14 @@ public class MineActivity extends AppCompatActivity implements View.OnClickListe
                     intent.setClass(MineActivity.this,LoginActivity.class);
                     startActivityForResult(intent,0x001);
                     break;
+                }else{//否则跳转到个人中心编辑界面
+
                 }
+            }
+            case R.id.post:{
+                Intent intent=new Intent();
+                intent.setClass(MineActivity.this,PostActivity.class);//跳转到发布分区选择界面
+                startActivityForResult(intent,0x003);
             }
         }
     }
