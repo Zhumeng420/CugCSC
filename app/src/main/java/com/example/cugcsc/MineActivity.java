@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.cugcsc.UserCenter.GetHeadByAsyc;
 import com.example.cugcsc.UserCenter.GlobalUserState;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -89,8 +90,8 @@ public class MineActivity extends AppCompatActivity implements View.OnClickListe
             UserPhone.setText("账号："+GlobalUserState.UserPhone);
             Typeface type = Typeface.createFromAsset(getAssets(),"login.ttf" );//设置按钮字体
             UserName.setTypeface(type);
-            //GetHeadByAsyc task=new GetHeadByAsyc(head);
-            //task.execute(user.url);
+            GetHeadByAsyc task=new GetHeadByAsyc(UserHead);
+            task.execute(GlobalUserState.URL);
         }
     }
 }

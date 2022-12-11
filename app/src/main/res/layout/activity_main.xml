@@ -19,7 +19,7 @@
             android:gravity="center">
             <EditText
                 android:id="@+id/search_context"
-                android:layout_width="318dp"
+                android:layout_width="290dp"
                 android:layout_height="52dp"
                 android:layout_marginStart="3dp"
                 android:layout_marginTop="3dp"

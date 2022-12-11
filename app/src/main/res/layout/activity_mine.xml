@@ -16,18 +16,28 @@
         android:clickable="true"
         android:paddingTop="8dp"
         android:paddingBottom="8dp">
-        <ImageView
-            android:id="@+id/user_head"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/head_card"
             android:layout_width="64dp"
             android:layout_height="64dp"
-            android:layout_marginLeft="15dp"
-            android:src="@drawable/user" />
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="10dp">
+            <ImageView
+                android:id="@+id/user_head"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginLeft="0dp"
+                android:src="@drawable/user" />
+        </androidx.cardview.widget.CardView>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="12dp"
-            android:layout_toRightOf="@id/user_head"
+            android:layout_toRightOf="@id/head_card"
             android:orientation="horizontal">
             <TextView
                 android:id="@+id/user_name"
@@ -43,8 +53,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="16dp"
-            android:layout_marginBottom="10dp"
-            android:layout_toRightOf="@id/user_head"
+            android:layout_marginBottom="15dp"
+            android:layout_toRightOf="@id/head_card"
             android:text="账号:"
             android:textColor="#AAAAAA"
             android:textSize="14sp" />
@@ -55,7 +65,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="55dp"
             android:layout_marginBottom="10dp"
-            android:layout_toRightOf="@id/user_head"
+            android:layout_toRightOf="@id/head_card"
             android:textColor="#AAAAAA"
             android:textSize="14sp" />
     </RelativeLayout>
@@ -69,19 +79,19 @@
         android:clickable="true"
         android:paddingLeft="12dp">
         <ImageView
-            android:id="@+id/iv_xiangce"
+            android:id="@+id/post"
             android:layout_width="26dp"
             android:layout_height="26dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="12dp"
-            android:src="@drawable/post"/>
+            android:src="@drawable/post2"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginStart="20dp"
-            android:layout_toEndOf="@id/iv_xiangce"
+            android:layout_toEndOf="@id/post"
             android:text="@string/pulish"
             android:textColor="#353535"
             android:textSize="16sp" />
@@ -102,7 +112,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="12dp"
-            android:src="@drawable/blog"/>
+            android:src="@drawable/blog3"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -135,7 +145,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="12dp"
-            android:src="@drawable/cloud" />
+            android:src="@drawable/cloud2" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -147,14 +157,107 @@
             android:textSize="16sp" />
         <View
             android:layout_width="match_parent"
-            android:layout_height="0.2dp"
+            android:layout_height="1dp"
             android:layout_alignParentBottom="true"
-            android:layout_marginRight="12dp"
-            android:background="#dadada" />
+            android:layout_marginStart="50dp"
+            android:background="#66A19E9E" />
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_marginTop="315dp"
+        android:layout_marginTop="305dp"
+        android:id="@+id/re_help2"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#FFFFFF"
+        android:clickable="true"
+        android:paddingLeft="12dp">
+        <ImageView
+            android:id="@+id/iv_money_bag2"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="12dp"
+            android:src="@drawable/collect2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/iv_money_bag2"
+            android:text="@string/my_collect"
+            android:textColor="#353535"
+            android:textSize="16sp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="50dp"
+            android:background="#66A19E9E" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_marginTop="365dp"
+        android:id="@+id/re_help3"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#FFFFFF"
+        android:clickable="true"
+        android:paddingLeft="12dp">
+        <ImageView
+            android:id="@+id/iv_money_bag3"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="12dp"
+            android:src="@drawable/suggest2" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/iv_money_bag3"
+            android:text="意见反馈"
+            android:textColor="#353535"
+            android:textSize="16sp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="50dp"
+            android:background="#66A19E9E" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="425dp"
+        android:id="@+id/re_help4"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#FFFFFF"
+        android:clickable="true"
+        android:paddingLeft="12dp">
+        <ImageView
+            android:id="@+id/iv_money_bag4"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="12dp"
+            android:src="@drawable/rule" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/iv_money_bag4"
+            android:text="社区公约"
+            android:textColor="#353535"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="495dp"
         android:id="@+id/tuichu"
         android:layout_width="match_parent"
         android:background="#FFFFFF"
@@ -168,7 +271,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="12dp"
-            android:src="@drawable/logout" />
+            android:src="@drawable/logout2" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -179,6 +282,7 @@
             android:textColor="#353535"
             android:textSize="16sp" />
     </RelativeLayout>
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/botton_navigation"
