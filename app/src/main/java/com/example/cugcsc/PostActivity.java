@@ -3,13 +3,23 @@ package com.example.cugcsc;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.Settings;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.cugcsc.UserCenter.GlobalUserState;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -20,6 +30,12 @@ import java.util.Objects;
 public class PostActivity extends AppCompatActivity  implements View.OnClickListener {
     private LinearLayout BackMine;
     private CardView Emotion;
+    //请求码，自己设置，保证 > 0并且不冲突
+    private static final int MY_PERMISSION_REQUEST_CODE = 10000;
+    //要申请的权限（可以一次申请多个权限），存放到数组里
+    private static final String permission[] = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +72,8 @@ public class PostActivity extends AppCompatActivity  implements View.OnClickList
         /***********绑定各分区的跳转*************/
         Emotion=findViewById(R.id.emotion_communicate);
         Emotion.setOnClickListener(this);
+        /**********申请手机权限******************/
+        requestPermission(this);
     }
     @Override
     public void onClick(View v) {
@@ -71,5 +89,40 @@ public class PostActivity extends AppCompatActivity  implements View.OnClickList
             }
         }
     }
-
+    private void requestPermission(Context context){
+        // 通过api判断手机当前版本号
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            // 安卓11，判断有没有“所有文件访问权限”权限
+            if (Environment.isExternalStorageManager()) {
+                Toast.makeText(this, "成功获取到权限", Toast.LENGTH_SHORT).show();
+            } else {
+                Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+                intent.setData(Uri.parse("package:" + context.getPackageName()));
+                startActivityForResult(intent,5555);
+            }
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "成功获取到权限", Toast.LENGTH_SHORT).show();
+            } else {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE}, 6666);
+            }
+        } else {
+            Toast.makeText(this, "成功获取到权限", Toast.LENGTH_SHORT).show();
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 6666) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
+                    ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "成功获取到权限", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "权限获取失败", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 }
