@@ -7,7 +7,6 @@
     tools:context=".PostActivity"
     android:background="#66DAD6D6"
     >
-
     <LinearLayout
         android:id="@+id/back_mine"
         android:layout_width="match_parent"
@@ -32,211 +31,183 @@
             android:textColor="#353535"
             android:textSize="16sp" />
     </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/lost_found"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="110dp"
         android:layout_marginTop="55dp"
-        android:background="@drawable/edittext_shape01"
-        android:clickable="true"
-        android:paddingLeft="12dp">
+        app:cardCornerRadius="20dp"
+        app:cardElevation="0dp">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/lost_background" />
         <androidx.cardview.widget.CardView
-            android:layout_width="50dp"
+            android:layout_width="60dp"
             android:layout_height="25dp"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="65dp"
             app:cardCornerRadius="20dp"
             app:cardElevation="0dp">
-
             <ImageView
-                android:layout_width="50dp"
+                android:layout_width="60dp"
                 android:layout_height="25dp"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="12dp"
                 android:src="@drawable/right" />
         </androidx.cardview.widget.CardView>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="25dp"
             android:text="失物招领"
-            android:textColor="#353535"
-            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:textSize="20sp"
             tools:ignore="NotSibling" />
-    </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 
-    <RelativeLayout
-        android:id="@+id/lost_found2"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="110dp"
         android:layout_marginTop="170dp"
-        android:background="@drawable/edittext_shape01"
-        android:clickable="true"
-        android:paddingLeft="12dp">
+        app:cardCornerRadius="20dp"
+        app:cardElevation="0dp">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/school_background" />
         <androidx.cardview.widget.CardView
-            android:layout_width="50dp"
+            android:layout_width="60dp"
             android:layout_height="25dp"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="65dp"
             app:cardCornerRadius="20dp"
             app:cardElevation="0dp">
-
             <ImageView
-                android:layout_width="50dp"
+                android:layout_width="60dp"
                 android:layout_height="25dp"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="12dp"
                 android:src="@drawable/right" />
         </androidx.cardview.widget.CardView>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="25dp"
             android:text="校园咨询"
-            android:textColor="#353535"
-            android:textSize="18sp"
-            tools:ignore="NotSibling" />
-    </RelativeLayout>
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            tools:ignore="NotSibling"
+            />
+    </androidx.cardview.widget.CardView>
 
-    <RelativeLayout
-        android:id="@+id/lost_found3"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="110dp"
         android:layout_marginTop="285dp"
-        android:background="@drawable/edittext_shape01"
-        android:clickable="true"
-        android:paddingLeft="12dp">
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="50dp"
-            android:layout_height="25dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="65dp"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="0dp">
-
-            <ImageView
-                android:layout_width="50dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="0dp"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/emotion_background" />
+            <androidx.cardview.widget.CardView
+                android:layout_width="60dp"
                 android:layout_height="25dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="12dp"
-                android:src="@drawable/right" />
-        </androidx.cardview.widget.CardView>
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="65dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp">
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/right" />
+            </androidx.cardview.widget.CardView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="25dp"
+                android:text="情感交流"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                tools:ignore="NotSibling"
+                />
+    </androidx.cardview.widget.CardView>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="25dp"
-            android:text="情感交流"
-            android:textColor="#353535"
-            android:textSize="18sp"
-            tools:ignore="NotSibling" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/lost_found4"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="110dp"
         android:layout_marginTop="400dp"
-        android:background="@drawable/edittext_shape01"
-        android:clickable="true"
-        android:paddingLeft="12dp">
-
+        app:cardCornerRadius="20dp"
+        app:cardElevation="0dp">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/interest_background" />
         <androidx.cardview.widget.CardView
-            android:layout_width="50dp"
+            android:layout_width="60dp"
             android:layout_height="25dp"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="65dp"
             app:cardCornerRadius="20dp"
             app:cardElevation="0dp">
-
             <ImageView
-                android:layout_width="50dp"
+                android:layout_width="60dp"
                 android:layout_height="25dp"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="12dp"
                 android:src="@drawable/right" />
         </androidx.cardview.widget.CardView>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="25dp"
             android:text="兴趣爱好"
-            android:textColor="#353535"
-            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:textSize="20sp"
             tools:ignore="NotSibling" />
-    </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 
-    <RelativeLayout
-        android:id="@+id/lost_found5"
-        android:layout_width="match_parent"
-        android:layout_height="110dp"
-        android:layout_marginTop="4100dp"
-        android:background="@drawable/edittext_shape01"
-        android:clickable="true"
-        android:paddingLeft="12dp">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="50dp"
-            android:layout_height="25dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="65dp"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="0dp">
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="25dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="12dp"
-                android:src="@drawable/right" />
-        </androidx.cardview.widget.CardView>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="25dp"
-            android:text="兴趣爱好"
-            android:textColor="#353535"
-            android:textSize="18sp"
-            tools:ignore="NotSibling" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/lost_found6"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="110dp"
         android:layout_marginTop="515dp"
-        android:background="@drawable/edittext_shape01"
-        android:clickable="true"
-        android:paddingLeft="12dp">
+
+        app:cardCornerRadius="20dp"
+        app:cardElevation="0dp">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/study_bakground" />
         <androidx.cardview.widget.CardView
-            android:layout_width="50dp"
+            android:layout_width="60dp"
             android:layout_height="25dp"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="65dp"
             app:cardCornerRadius="20dp"
             app:cardElevation="0dp">
             <ImageView
-                android:layout_width="50dp"
+                android:layout_width="60dp"
                 android:layout_height="25dp"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="12dp"
                 android:src="@drawable/right" />
         </androidx.cardview.widget.CardView>
         <TextView
@@ -245,10 +216,13 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="25dp"
             android:text="学习交流"
-            android:textColor="#353535"
-            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:textSize="20sp"
             tools:ignore="NotSibling" />
-    </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/botton_navigation"
