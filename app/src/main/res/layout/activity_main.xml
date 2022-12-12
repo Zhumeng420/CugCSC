@@ -5,22 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@drawable/login_background"
+    android:background="@drawable/background1"
     android:id="@+id/main_background">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-
-    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/serach_view"
         android:layout_width="330dp"
         android:layout_height="50dp"
-        android:layout_marginTop="360dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/edittext_shape01"
         android:clickable="true"
         android:layout_marginHorizontal="@android:dimen/app_icon_size"
@@ -57,7 +50,7 @@
         android:id="@+id/content_view"
         android:layout_width="400dp"
         android:layout_height="180dp"
-        android:layout_marginTop="415dp"
+        android:layout_marginTop="300dp"
         android:background="@drawable/edittext_shape01"
         android:clickable="true"
         android:layout_marginHorizontal="@android:dimen/app_icon_size">

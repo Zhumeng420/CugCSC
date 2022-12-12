@@ -56,10 +56,10 @@ public class MainActivity extends AppCompatActivity {
         v = findViewById(R.id.serach_view);
         v.getBackground().setAlpha(0);//0~255透明度值 ，0为完全透明，255为不透明
         v = findViewById(R.id.search_context);
-        v.getBackground().setAlpha(200);//0~255透明度值 ，0为完全透明，255为不透明
+        v.getBackground().setAlpha(160);//0~255透明度值 ，0为完全透明，255为不透明
         v = findViewById(R.id.search_button);
         v.getBackground().setAlpha(40);//0~255透明度值 ，0为完全透明，255为不透明
         v = findViewById(R.id.content_view);
-        v.getBackground().setAlpha(200);//0~255透明度值 ，0为完全透明，255为不透明
+        v.getBackground().setAlpha(160);//0~255透明度值 ，0为完全透明，255为不透明
     }
 }

@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -43,5 +46,20 @@ public class LibraryActivity extends AppCompatActivity {
                 return false;
             }
         });
+        /********搜索按钮更改字体*********/
+        Button SearchButton=findViewById(R.id.search_button2);
+        Typeface type = Typeface.createFromAsset(getAssets(),"search.otf" );//设置按钮字体
+        SearchButton.setTypeface(type);
+        /*********设置背景图片透明度*********/
+        View v = findViewById(R.id.main_background2);
+        v.getBackground().setAlpha(200);//0~255透明度值 ，0为完全透明，255为不透明
+        v = findViewById(R.id.serach_view2);
+        v.getBackground().setAlpha(0);//0~255透明度值 ，0为完全透明，255为不透明
+        v = findViewById(R.id.search_context2);
+        v.getBackground().setAlpha(160);//0~255透明度值 ，0为完全透明，255为不透明
+        v = findViewById(R.id.search_button2);
+        v.getBackground().setAlpha(40);//0~255透明度值 ，0为完全透明，255为不透明
+        v = findViewById(R.id.content_view2);
+        v.getBackground().setAlpha(160);//0~255透明度值 ，0为完全透明，255为不透明
     }
 }
