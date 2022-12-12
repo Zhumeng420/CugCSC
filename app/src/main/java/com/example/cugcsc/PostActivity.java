@@ -2,6 +2,7 @@ package com.example.cugcsc;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -18,6 +19,7 @@ import java.util.Objects;
 
 public class PostActivity extends AppCompatActivity  implements View.OnClickListener {
     private LinearLayout BackMine;
+    private CardView Emotion;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,20 +53,22 @@ public class PostActivity extends AppCompatActivity  implements View.OnClickList
         /************返回个人中心***************/
         BackMine=findViewById(R.id.back_mine);
         BackMine.setOnClickListener(this);//监听点击事件
+        /***********绑定各分区的跳转*************/
+        Emotion=findViewById(R.id.emotion_communicate);
+        Emotion.setOnClickListener(this);
     }
     @Override
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.back_mine:{//返回按钮被点击
-                /*******登录状态判断*******/
-                if(Objects.equals(GlobalUserState.UserPhone, "")){
-                    finish();//直接结束当前页面生命周期
-                    break;
-                }else{//否则跳转到个人中心编辑界面
-
-                }
+                finish();//直接结束当前页面生命周期
+                break;
             }
-
+            case R.id.emotion_communicate:{//当情感交流分区被点击
+                startActivity(new Intent(getApplicationContext(),EmotionActivity.class));//直接覆盖当前界面（减小内存开销）
+                overridePendingTransition(0,0);
+                break;
+            }
         }
     }
 
