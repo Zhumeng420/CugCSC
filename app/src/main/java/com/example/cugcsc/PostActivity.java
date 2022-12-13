@@ -33,6 +33,7 @@ import java.util.Objects;
 public class PostActivity extends AppCompatActivity  implements View.OnClickListener {
     private LinearLayout BackMine;
     private CardView Emotion;
+    private CardView LostAndFound;
     //请求码，自己设置，保证 > 0并且不冲突
     private static final int MY_PERMISSION_REQUEST_CODE = 10000;
     //要申请的权限（可以一次申请多个权限），存放到数组里
@@ -75,9 +76,12 @@ public class PostActivity extends AppCompatActivity  implements View.OnClickList
         /***********绑定各分区的跳转*************/
         Emotion=findViewById(R.id.emotion_communicate);
         Emotion.setOnClickListener(this);
+        LostAndFound=findViewById(R.id.lost_and_found);
+        LostAndFound.setOnClickListener(this);
         /**********申请手机权限******************/
         requestPermission(this);
     }
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
         switch(v.getId()){
@@ -87,6 +91,11 @@ public class PostActivity extends AppCompatActivity  implements View.OnClickList
             }
             case R.id.emotion_communicate:{//当情感交流分区被点击
                 startActivity(new Intent(getApplicationContext(),EmotionActivity.class));//直接覆盖当前界面（减小内存开销）
+                overridePendingTransition(0,0);
+                break;
+            }
+            case R.id.lost_and_found:{
+                startActivity(new Intent(getApplicationContext(),LostAndFoundActivity.class));//直接覆盖当前界面（减小内存开销）
                 overridePendingTransition(0,0);
                 break;
             }

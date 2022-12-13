@@ -14,7 +14,7 @@
         android:orientation="horizontal"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp"
-        android:background="@color/white">
+        android:background="@drawable/color_top">
         <ImageView
             android:id="@+id/back"
             android:layout_width="24dp"
@@ -36,7 +36,8 @@
         android:layout_height="110dp"
         android:layout_marginTop="55dp"
         app:cardCornerRadius="20dp"
-        app:cardElevation="0dp">
+        app:cardElevation="0dp"
+        android:id="@+id/lost_and_found">
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="110dp"
