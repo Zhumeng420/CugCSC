@@ -1,5 +1,8 @@
 package com.example.cugcsc;
 
+import static com.example.cugcsc.tool.toast.ErrorToast;
+import static com.example.cugcsc.tool.toast.SuccessToast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -89,12 +92,13 @@ public class PostActivity extends AppCompatActivity  implements View.OnClickList
             }
         }
     }
+    /*******************以下是权限动态权限获取**************************/
     private void requestPermission(Context context){
         // 通过api判断手机当前版本号
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             // 安卓11，判断有没有“所有文件访问权限”权限
             if (Environment.isExternalStorageManager()) {
-                Toast.makeText(this, "成功获取到权限", Toast.LENGTH_SHORT).show();
+                //SuccessToast(this,"获取到文件访问权限");
             } else {
                 Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
                 intent.setData(Uri.parse("package:" + context.getPackageName()));
@@ -104,13 +108,13 @@ public class PostActivity extends AppCompatActivity  implements View.OnClickList
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
                     == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "成功获取到权限", Toast.LENGTH_SHORT).show();
+                //SuccessToast(this,"获取到文件访问权限");
             } else {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE}, 6666);
             }
         } else {
-            Toast.makeText(this, "成功获取到权限", Toast.LENGTH_SHORT).show();
+            //SuccessToast(this,"获取到文件访问权限");
         }
     }
     @Override
@@ -119,9 +123,9 @@ public class PostActivity extends AppCompatActivity  implements View.OnClickList
         if (requestCode == 6666) {
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
                     ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "成功获取到权限", Toast.LENGTH_SHORT).show();
+                SuccessToast(this,"获取到文件访问权限");
             } else {
-                Toast.makeText(this, "权限获取失败", Toast.LENGTH_SHORT).show();
+                ErrorToast(this,"文件访问权限获取失败");
             }
         }
     }
