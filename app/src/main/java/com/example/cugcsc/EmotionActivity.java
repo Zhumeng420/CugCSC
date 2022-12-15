@@ -122,6 +122,37 @@ public class EmotionActivity extends AppCompatActivity implements  View.OnClickL
     private ImageView shutup;
     private ImageView afraid;
     private ImageView laughtOut;
+    private ImageView laugh;
+    private ImageView laugh2;
+    private ImageView afread2;
+    private ImageView cool2;
+    private ImageView shutup2;
+    private ImageView afread3;
+    private ImageView laughtout2;
+    private ImageView noemo;
+    private ImageView poisoning;
+    private ImageView like;
+    private ImageView noemo2;
+    private ImageView think;
+    private ImageView badlaugh;
+    private ImageView sad;
+    private ImageView evil;
+    private ImageView love;
+    private ImageView confuse;
+    private ImageView mask;
+    private ImageView cry;
+    private ImageView sad2;
+    private ImageView angry;
+    private ImageView kiss;
+    private ImageView lookdown;
+    private ImageView hurt;
+    private ImageView noemo3;
+    private ImageView cry2;
+    private ImageView split;
+    private ImageView kiss2;
+    private ImageView smile;
+    private ImageView dizzy;
+    private ImageView poisoning2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -175,6 +206,70 @@ public class EmotionActivity extends AppCompatActivity implements  View.OnClickL
         shutup.setOnClickListener(this);
         laughtOut=findViewById(R.id.laught_out);
         laughtOut.setOnClickListener(this);
+        afraid=findViewById(R.id.afraid);
+        afraid.setOnClickListener(this);
+        laugh=findViewById(R.id.laugh);
+        laugh.setOnClickListener(this);
+        laugh2=findViewById(R.id.laugh2);
+        laugh2.setOnClickListener(this);
+        afread2=findViewById(R.id.afread2);
+        afread2.setOnClickListener(this);
+        cool2.findViewById(R.id.cool2);
+        cool2.setOnClickListener(this);
+        shutup2.findViewById(R.id.shutup2);
+        shutup2.setOnClickListener(this);
+        afread3=findViewById(R.id.afraid3);
+        afread3.setOnClickListener(this);
+        laughtout2=findViewById(R.id.laught_out2);
+        laughtout2.setOnClickListener(this);
+        noemo=findViewById(R.id.noemo);
+        noemo.setOnClickListener(this);
+        poisoning=findViewById(R.id.poisoning);
+        poisoning.setOnClickListener(this);
+        like=findViewById(R.id.like);
+        like.setOnClickListener(this);
+        noemo2=findViewById(R.id.noemo2);
+        noemo2.setOnClickListener(this);
+        think=findViewById(R.id.think);
+        think.setOnClickListener(this);
+        badlaugh=findViewById(R.id.badlaugh);
+        badlaugh.setOnClickListener(this);
+        sad=findViewById(R.id.sad);
+        sad.setOnClickListener(this);
+        evil=findViewById(R.id.evil);
+        evil.setOnClickListener(this);
+        love=findViewById(R.id.love);
+        love.setOnClickListener(this);
+        confuse=findViewById(R.id.confuse);
+        confuse.setOnClickListener(this);
+        mask=findViewById(R.id.mask);
+        mask.setOnClickListener(this);
+        cry=findViewById(R.id.cry);
+        cry.setOnClickListener(this);
+        sad2=findViewById(R.id.sad2);
+        sad2.setOnClickListener(this);
+        angry=findViewById(R.id.angry);
+        angry.setOnClickListener(this);
+        kiss=findViewById(R.id.kiss);
+        kiss.setOnClickListener(this);
+        lookdown=findViewById(R.id.lookdown);
+        lookdown.setOnClickListener(this);
+        hurt.findViewById(R.id.hurt);
+        hurt.setOnClickListener(this);
+        noemo3=findViewById(R.id.noemo3);
+        noemo3.setOnClickListener(this);
+        cry2=findViewById(R.id.cry2);
+        cry2.setOnClickListener(this);
+        split=findViewById(R.id.split);
+        split.setOnClickListener(this);
+        kiss2=findViewById(R.id.kiss2);
+        kiss2.setOnClickListener(this);
+        smile=findViewById(R.id.smile);
+        smile.setOnClickListener(this);
+        dizzy=findViewById(R.id.dizzy);
+        dizzy.setOnClickListener(this);
+        poisoning2=findViewById(R.id.poisoning2);
+        poisoning2.setOnClickListener(this);
     }
     /**
      * 初始化文本编辑器
@@ -456,6 +551,87 @@ public class EmotionActivity extends AppCompatActivity implements  View.OnClickL
             fold();
         }else if(id==R.id.shutup){
             insertEmoj("http://81.70.13.188:9000/cugsdn/shutup_1670979004155.png");
+            fold();
+        }else if(id==R.id.afraid){
+            insertEmoj("http://81.70.13.188:9000/cugsdn/afraid_1671065733952.png");
+            fold();
+        }else if(id==R.id.laught_out){
+            insertEmoj("http://81.70.13.188:9000/cugsdn/laguhtout_1671065796047.png");
+            fold();
+        }else if(id==R.id.laugh){
+            insertEmoj("http://81.70.13.188:9000/cugsdn/laugh_1671065983258.png");
+            fold();
+        }else if(id==R.id.laugh2){
+            insertEmoj("http://81.70.13.188:9000/cugsdn/laugh2_1671066014596.png");
+            fold();
+        }else if(id==R.id.afread2){
+            insertEmoj("http://81.70.13.188:9000/cugsdn/afread2_1671066065502.png");
+            fold();
+        }else if(id==R.id.cool2){
+            insertEmoj("http://81.70.13.188:9000/cugsdn/cool2_1671109971394.png");
+            fold();
+        }else if(id==R.id.shutup2){
+            insertEmoj("http://81.70.13.188:9000/cugsdn/shutup2_1671110018591.png");
+            fold();
+        }else if(id==R.id.afraid3){
+            insertEmoj("http://81.70.13.188:9000/cugsdn/afread3_1671110035938.png");
+            fold();
+        }else if(id==R.id.laught_out2){
+            insertEmoj("http://81.70.13.188:9000/cugsdn/laughtout2_1671110058186.png");
+            fold();
+        }else if(id==R.id.noemo){
+            insertEmoj("http://81.70.13.188:9000/cugsdn/noemo_1671110090157.png");
+            fold();
+        }else if(id==R.id.poisoning){
+            insertEmoj("http://81.70.13.188:9000/cugsdn/poisoning_1671110127069.png");
+            fold();
+        }else if(id==R.id.like){
+            insertEmoj("http://81.70.13.188:9000/cugsdn/like_1671110152161.png");
+            fold();
+        }else if(id==R.id.noemo2){
+            insertEmoj("http://81.70.13.188:9000/cugsdn/noemo2_1671110180177.png");
+            fold();
+        }else if(id==R.id.think){
+            insertEmoj("http://81.70.13.188:9000/cugsdn/think_1671110222389.png");
+            fold();
+        }else  if(id==R.id.badlaugh){
+            insertEmoj("http://81.70.13.188:9000/cugsdn/badlaugh_1671111716502.png");
+            fold();
+        }else if(id==R.id.sad){
+            insertEmoj("http://81.70.13.188:9000/cugsdn/sad_1671111747077.png");
+            fold();
+        }else if(id==R.id.evil){
+            insertEmoj("http://81.70.13.188:9000/cugsdn/evil_1671111777708.png");
+            fold();
+        }else if(id==R.id.love){
+            insertEmoj("http://81.70.13.188:9000/cugsdn/love_1671111791798.png");
+            fold();
+        }else if(id==R.id.confuse){
+            insertEmoj("http://81.70.13.188:9000/cugsdn/confuse_1671111813923.png");
+            fold();
+        }else if(id==R.id.mask){
+            insertEmoj("http://81.70.13.188:9000/cugsdn/mask_1671111832301.png");
+            fold();
+        }else if(id==R.id.cry){
+            insertEmoj("http://81.70.13.188:9000/cugsdn/cry_1671111894557.png");
+            fold();
+        }else if(id==R.id.sad2){
+            insertEmoj("http://81.70.13.188:9000/cugsdn/sad2_1671111959077.png");
+            fold();
+        }else if(id==R.id.angry){
+            insertEmoj("http://81.70.13.188:9000/cugsdn/angry_1671111992982.png");
+            fold();
+        }else if(id==R.id.kiss){
+            insertEmoj("http://81.70.13.188:9000/cugsdn/kiss_1671112014042.png");
+            fold();
+        }else if(id==R.id.lookdown){
+            insertEmoj("http://81.70.13.188:9000/cugsdn/lookdown_1671112037338.png");
+            fold();
+        }else if(id==R.id.hurt){
+            insertEmoj("http://81.70.13.188:9000/cugsdn/hurt_1671112059609.png");
+            fold();
+        }else if(id==R.id.cry2){
+            insertEmoj("http://81.70.13.188:9000/cugsdn/cry2_1671112199091.png");
             fold();
         }
     }

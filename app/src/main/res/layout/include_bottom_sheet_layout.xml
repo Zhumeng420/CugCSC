@@ -39,13 +39,14 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="60dp"
                 android:src="@drawable/shutup"/>
+
             <ImageView
                 android:id="@+id/afraid"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="110dp"
-                android:src="@drawable/afraid"/>
+                android:src="@drawable/afraid" />
             <ImageView
                 android:id="@+id/laught_out"
                 android:layout_width="30dp"
@@ -196,13 +197,14 @@
             android:clickable="true"
             android:paddingLeft="12dp"
             android:layout_marginTop="120dp">
+
             <ImageView
                 android:id="@+id/love"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="10dp"
-                android:src="@drawable/love"/>
+                android:src="@drawable/love" />
             <ImageView
                 android:id="@+id/confuse"
                 android:layout_width="30dp"
@@ -253,13 +255,14 @@
             android:clickable="true"
             android:paddingLeft="12dp"
             android:layout_marginTop="160dp">
+
             <ImageView
                 android:id="@+id/kiss"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="10dp"
-                android:src="@drawable/kiss"/>
+                android:src="@drawable/kiss" />
             <ImageView
                 android:id="@+id/lookdown"
                 android:layout_width="30dp"
@@ -311,13 +314,14 @@
             android:clickable="true"
             android:paddingLeft="12dp"
             android:layout_marginTop="200dp">
+
             <ImageView
                 android:id="@+id/kiss2"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="10dp"
-                android:src="@drawable/kiss2"/>
+                android:src="@drawable/kiss2" />
             <ImageView
                 android:id="@+id/smile"
                 android:layout_width="30dp"
