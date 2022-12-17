@@ -8,12 +8,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.ContentUris;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.icu.util.Calendar;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -25,13 +28,19 @@ import android.provider.MediaStore;
 import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+
 
 public class LostAndFoundActivity extends AppCompatActivity implements View.OnClickListener {
     CardView Describe;
@@ -44,6 +53,12 @@ public class LostAndFoundActivity extends AppCompatActivity implements View.OnCl
     ImageView AddPicture2;
     String path;
     String url;
+    TextView PickTime;
+    TextView LostPlace;
+    private DatePickerDialog dateDialog;
+    private TimePickerDialog timeDialog;
+    private EditText editText;
+    private int year, monthOfYear, dayOfMonth, hourOfDay, minute;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,16 +86,36 @@ public class LostAndFoundActivity extends AppCompatActivity implements View.OnCl
         AddPicture.setOnClickListener(this);
         AddPicture2=findViewById(R.id.add_picture2);
         AddPicture2.setOnClickListener(this);
+        PickTime=findViewById(R.id.pick_time);
+        PickTime.setOnClickListener(this);
+        LostPlace=findViewById(R.id.lost_place);
+        LostPlace.setOnClickListener(this);
         /*************文件读写权限*************/
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R ||
                 Environment.isExternalStorageManager()
         ) {
             SuccessToast(this,"获取到文件访问权限");
-        } else {
-
         }
+        /************日期时间选择对话框**************/
+        Calendar calendar = Calendar.getInstance();
+        year = calendar.get(Calendar.YEAR);
+        monthOfYear = calendar.get(Calendar.MONTH);
+        dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+        hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
+        minute = calendar.get(Calendar.MINUTE);
+        dateDialog = new DatePickerDialog(this, (arg0, year, monthOfYear, dayOfMonth) -> {
+            // 把获取的日期显示在文本框内，月份从0开始计数，所以要加1
+            String text = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
+            editText.setText(text);
+        }, year, monthOfYear, dayOfMonth);
+        timeDialog = new TimePickerDialog(this, (view, hourOfDay, minute) -> {
+            // TODO Auto-generated method stub
+            Toast.makeText(LostAndFoundActivity.this, hourOfDay + ":" + minute,
+                    Toast.LENGTH_LONG).show();
+        }, hourOfDay, minute, true); // 最后一个参数设置是否为24小时制
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
         switch(v.getId()){
@@ -113,6 +148,10 @@ public class LostAndFoundActivity extends AppCompatActivity implements View.OnCl
                 intent.setType("image/*");
                 this.startActivityForResult(intent, 0x006);
                 break;
+            }
+            case R.id.pick_time:{
+                //timeDialog.show();
+                dateDialog.show();
             }
         }
     }

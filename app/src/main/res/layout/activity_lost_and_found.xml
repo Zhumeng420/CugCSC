@@ -163,16 +163,18 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="12dp"
                     android:src="@drawable/location"/>
+
                 <EditText
+                    android:id="@+id/lost_place"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="20dp"
-                    android:paddingStart="15dp"
                     android:layout_toEndOf="@id/post2"
                     android:background="@drawable/edittext_shape06"
                     android:hint="丢失/拾到地点"
+                    android:paddingStart="15dp"
                     android:textColor="@color/black"
                     android:textColorHint="#9E9696"
                     android:textSize="18sp" />
@@ -195,6 +197,7 @@
                     android:src="@drawable/time"/>
 
                 <EditText
+                    android:id="@+id/pick_time"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_centerVertical="true"
