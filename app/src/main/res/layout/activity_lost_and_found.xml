@@ -57,9 +57,9 @@
             app:cardElevation="0dp"
             app:cardCornerRadius="10dp">
             <android.widget.Button
-                android:id="@+id/login"
+                android:id="@+id/lost"
                 android:layout_width="140dp"
-                android:layout_height="44dp"
+                android:layout_height="38dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="15dp"
                 android:layout_marginTop="3dp"
@@ -67,11 +67,11 @@
                 android:background="@drawable/color_button"
                 android:text="失物招领"
                 android:textColor="@color/white"
-                android:textSize="22sp" />
+                android:textSize="18sp" />
             <android.widget.Button
-                android:id="@+id/login2"
+                android:id="@+id/find"
                 android:layout_width="140dp"
-                android:layout_height="44dp"
+                android:layout_height="38dp"
                 android:layout_marginStart="172dp"
                 android:layout_marginEnd="15dp"
                 android:layout_marginTop="3dp"
@@ -79,21 +79,21 @@
                 android:background="@drawable/edittext_shape06"
                 android:text="寻物启事"
                 android:textColor="@color/white"
-                android:textSize="22sp" />
+                android:textSize="18sp" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/describe_obj"
             android:layout_width="match_parent"
-            android:layout_height="140dp"
+            android:layout_height="120dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="65dp"
+            android:layout_marginTop="60dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             app:cardElevation="0dp"
             app:cardCornerRadius="20dp">
-
             <EditText
+                android:id="@+id/lost_describe"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
@@ -110,9 +110,9 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="240dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="215dp"
+            android:layout_marginTop="185dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             app:cardCornerRadius="20dp"
@@ -141,7 +141,7 @@
             android:layout_width="match_parent"
             android:layout_height="190dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="475dp"
+            android:layout_marginTop="433dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             app:cardCornerRadius="20dp"
@@ -269,6 +269,19 @@
                     android:textSize="18sp" />
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
+
+        <android.widget.Button
+            android:id="@+id/lost_submit"
+            android:layout_width="329dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="630dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="3dp"
+            android:background="@drawable/color_button"
+            android:text="发                 布"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
     </androidx.cardview.widget.CardView>
 
 </RelativeLayout>
