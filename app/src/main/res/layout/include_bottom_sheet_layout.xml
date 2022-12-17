@@ -83,13 +83,14 @@
             android:clickable="true"
             android:paddingLeft="12dp"
             android:layout_marginTop="40dp">
+
             <ImageView
                 android:id="@+id/cool2"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="10dp"
-                android:src="@drawable/cool2"/>
+                android:src="@drawable/cool2" />
             <ImageView
                 android:id="@+id/shutup2"
                 android:layout_width="30dp"
@@ -226,13 +227,14 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="160dp"
                 android:src="@drawable/cry"/>
+
             <ImageView
                 android:id="@+id/silk"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="210dp"
-                android:src="@drawable/silk"/>
+                android:src="@drawable/silk" />
             <ImageView
                 android:id="@+id/sad2"
                 android:layout_width="30dp"

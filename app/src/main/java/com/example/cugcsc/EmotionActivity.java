@@ -214,9 +214,9 @@ public class EmotionActivity extends AppCompatActivity implements  View.OnClickL
         laugh2.setOnClickListener(this);
         afread2=findViewById(R.id.afread2);
         afread2.setOnClickListener(this);
-        cool2.findViewById(R.id.cool2);
+        cool2=findViewById(R.id.cool2);
         cool2.setOnClickListener(this);
-        shutup2.findViewById(R.id.shutup2);
+        shutup2=findViewById(R.id.shutup2);
         shutup2.setOnClickListener(this);
         afread3=findViewById(R.id.afraid3);
         afread3.setOnClickListener(this);
@@ -254,7 +254,7 @@ public class EmotionActivity extends AppCompatActivity implements  View.OnClickL
         kiss.setOnClickListener(this);
         lookdown=findViewById(R.id.lookdown);
         lookdown.setOnClickListener(this);
-        hurt.findViewById(R.id.hurt);
+        hurt=findViewById(R.id.hurt);
         hurt.setOnClickListener(this);
         noemo3=findViewById(R.id.noemo3);
         noemo3.setOnClickListener(this);

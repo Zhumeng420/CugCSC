@@ -37,8 +37,6 @@
         </LinearLayout>
     </LinearLayout>
 
-
-
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -109,8 +107,6 @@
                 android:textColorHint="#9E9696"
                 android:textSize="18sp" />
         </androidx.cardview.widget.CardView>
-
-
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"

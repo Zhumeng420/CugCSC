@@ -4,8 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.os.Bundle;
+import android.view.View;
 
-public class LostAndFoundActivity extends AppCompatActivity {
+public class LostAndFoundActivity extends AppCompatActivity implements View.OnClickListener {
     CardView Describe;
     CardView Photo;
     CardView PeopleInfo;
@@ -27,5 +28,10 @@ public class LostAndFoundActivity extends AppCompatActivity {
         PeopleInfo=findViewById(R.id.people_info);
         PeopleInfo.setCardElevation(8);//设置阴影部分大小
         PeopleInfo.setContentPadding(5,5,5,5);//设置图片距离阴影大小
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

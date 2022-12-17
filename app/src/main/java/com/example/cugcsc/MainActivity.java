@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,7 +16,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements  View.OnClickListener {
+    ImageView LostCenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,5 +63,18 @@ public class MainActivity extends AppCompatActivity {
         v.getBackground().setAlpha(40);//0~255透明度值 ，0为完全透明，255为不透明
         v = findViewById(R.id.content_view);
         v.getBackground().setAlpha(160);//0~255透明度值 ，0为完全透明，255为不透明
+        /********绑定事件****************/
+        LostCenter=findViewById(R.id.lost_center);
+        LostCenter.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.lost_center:{//失物招领分区
+                startActivity(new Intent(getApplicationContext(),LostFoundShowActivity.class));
+                overridePendingTransition(0,0);
+            }
+        }
     }
 }

@@ -18,6 +18,7 @@
         android:clickable="true"
         android:layout_marginHorizontal="@android:dimen/app_icon_size"
       >
+
         <EditText
             android:id="@+id/search_context"
             android:layout_width="330dp"

@@ -6,8 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.cugcsc.LostFoundShowActivity;
 import com.example.cugcsc.R;
 
 public class toast {
@@ -53,6 +53,19 @@ public class toast {
     public static  void SuccessToast(Context context,String messgage){
         android.widget.Toast toast2=new android.widget.Toast(context);
         LayoutInflater inflater=LayoutInflater.from(context);
+        View view=inflater.inflate(R.layout.toast, null);
+        ImageView imageview= (ImageView) view.findViewById(R.id.tip_img);
+        TextView textview= (TextView) view.findViewById(R.id.tip_info);
+        imageview.setImageResource(R.drawable.sucess);
+        textview.setText(messgage);
+        toast2.setView(view);
+        toast2.setGravity(Gravity.TOP, 0, 50);
+        toast2.setDuration(android.widget.Toast.LENGTH_SHORT);//显示的时间长短
+        toast2.show();
+    }
+    public static void ItemToast(LostFoundShowActivity.StaggeredGrideViewRecAdapter.OnItemClickListener context, String messgage){
+        android.widget.Toast toast2=new android.widget.Toast((Context) context);
+        LayoutInflater inflater=LayoutInflater.from((Context) context);
         View view=inflater.inflate(R.layout.toast, null);
         ImageView imageview= (ImageView) view.findViewById(R.id.tip_img);
         TextView textview= (TextView) view.findViewById(R.id.tip_info);
