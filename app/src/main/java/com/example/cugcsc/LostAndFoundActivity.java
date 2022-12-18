@@ -26,6 +26,7 @@ import android.os.Message;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.provider.Settings;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -53,6 +54,7 @@ public class LostAndFoundActivity extends AppCompatActivity implements View.OnCl
     ImageView AddPicture2;
     String path;
     String url;
+    String url2;
     TextView PickTime;
     TextView LostPlace;
     private DatePickerDialog dateDialog;
@@ -88,6 +90,7 @@ public class LostAndFoundActivity extends AppCompatActivity implements View.OnCl
         AddPicture2.setOnClickListener(this);
         PickTime=findViewById(R.id.pick_time);
         PickTime.setOnClickListener(this);
+        PickTime.setInputType(InputType.TYPE_NULL);
         LostPlace=findViewById(R.id.lost_place);
         LostPlace.setOnClickListener(this);
         /*************文件读写权限*************/
@@ -106,12 +109,11 @@ public class LostAndFoundActivity extends AppCompatActivity implements View.OnCl
         dateDialog = new DatePickerDialog(this, (arg0, year, monthOfYear, dayOfMonth) -> {
             // 把获取的日期显示在文本框内，月份从0开始计数，所以要加1
             String text = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
-            editText.setText(text);
+            Toast.makeText(LostAndFoundActivity.this, text, Toast.LENGTH_LONG).show();
         }, year, monthOfYear, dayOfMonth);
         timeDialog = new TimePickerDialog(this, (view, hourOfDay, minute) -> {
             // TODO Auto-generated method stub
-            Toast.makeText(LostAndFoundActivity.this, hourOfDay + ":" + minute,
-                    Toast.LENGTH_LONG).show();
+
         }, hourOfDay, minute, true); // 最后一个参数设置是否为24小时制
     }
 
@@ -183,15 +185,17 @@ public class LostAndFoundActivity extends AppCompatActivity implements View.OnCl
         System.out.println("测试文件上传"+data.getData());
         System.out.println("测试路径"+path);
         if (requestCode == 0x005) {
+            AddPicture.setImageURI(uri);
             new Thread(() -> {//更新数据库
                 url=UploadImage(path);
-                handler.sendEmptyMessage(1);//通知主线程更新控件
+                //handler.sendEmptyMessage(1);//通知主线程更新控件
             }).start();
             //mEditor.insertImage(ImageUrl.image_url, "dachshund");
         }else if(requestCode==0x006){
+            AddPicture2.setImageURI(uri);
             new Thread(() -> {//更新数据库
-                url=UploadImage(path);
-                handler.sendEmptyMessage(2);//通知主线程更新控件
+                url2=UploadImage(path);
+                //handler.sendEmptyMessage(2);//通知主线程更新控件
             }).start();
         }
     }
@@ -220,7 +224,7 @@ public class LostAndFoundActivity extends AppCompatActivity implements View.OnCl
                         @Override
                         public void run() {
                             // TODO Auto-generated method stub
-                            Bitmap bmp = getURLimage(url);
+                            Bitmap bmp = getURLimage(url2);
                             Message msg = new Message();
                             msg.what = 4;
                             msg.obj = bmp;
