@@ -1,5 +1,6 @@
 package com.example.cugcsc;
 
+import static com.example.cugcsc.tool.BitmapUtil.compressImage;
 import static com.example.cugcsc.tool.HttpUtils.UploadImage;
 import static com.example.cugcsc.tool.toast.SuccessToast;
 import static com.example.cugcsc.tool.toast.WarnToast;
@@ -130,6 +131,9 @@ public class LostAndFoundActivity extends AppCompatActivity implements View.OnCl
                     //Toast.LENGTH_LONG).show();
             PickTime.setText(PickTime.getText().toString()+" "+hourOfDay + ":" + minute);
         }, hourOfDay, minute, true); // 最后一个参数设置是否为24小时制
+        /******初始化url*******/
+        url=null;
+        url2=null;
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -172,37 +176,48 @@ public class LostAndFoundActivity extends AppCompatActivity implements View.OnCl
                 break;
             }
             case R.id.lost_submit:{
+                if(url==null){
+                    url="https://tse1-mm.cn.bing.net/th/id/OIP-C.Orp_AQoc00mZb-e1N-c8cgD6D6?pid=ImgDet&rs=1";
+                }
+                if(url2==null){
+                    url2="https://tse1-mm.cn.bing.net/th/id/OIP-C.Orp_AQoc00mZb-e1N-c8cgD6D6?pid=ImgDet&rs=1";
+                }
                 String describe=LostDescribe.getText().toString();
                 String location=LostPlace.getText().toString();
                 String losttime=PickTime.getText().toString();
                 String contract=ContractPeople.getText().toString();
                 String call=PeopleCall.getText().toString();
-                AlertDialog alert=new AlertDialog.Builder(this).create();
-                alert.setTitle("系统提示");//设置对话框的标题
-                alert.setMessage("是否确定发布？");//设置对话框显示的内容
-                //添加“取消”按钮
-                alert.setButton(DialogInterface.BUTTON_NEGATIVE, "取消",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog,int which) {
-                                //Toast.makeText(LostAndFoundActivity.this, "取消发布", Toast.LENGTH_SHORT).show();
-                                WarnToast(LostAndFoundActivity.this, "取消发布");
-                            }
-                        });
-                //添加“确定”按钮
-                alert.setButton(DialogInterface.BUTTON_POSITIVE, "确定",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog,int which) {
-                                /*******************以下向数据库保存博客********************/
-                                PostLostAndFoundByAsync task=new PostLostAndFoundByAsync(LostAndFoundActivity.this,
-                                        Flag,describe,url,url2,location,losttime,contract,call, GlobalUserState.UserPhone);
-                                task.execute(0);
-                                //Toast.makeText(PostBlogActivity.this, "发布成功", Toast.LENGTH_SHORT).show();
-                                SuccessToast(LostAndFoundActivity.this,"发布成功");
-                            }
-                        });
-                alert.show();//显示对话框
+                if(contract.equals("") || call.equals("")){
+                    WarnToast(LostAndFoundActivity.this, "请留下联系方式");
+                }
+                else {
+                    AlertDialog alert = new AlertDialog.Builder(this).create();
+                    alert.setTitle("系统提示");//设置对话框的标题
+                    alert.setMessage("是否确定发布？");//设置对话框显示的内容
+                    //添加“取消”按钮
+                    alert.setButton(DialogInterface.BUTTON_NEGATIVE, "取消",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    //Toast.makeText(LostAndFoundActivity.this, "取消发布", Toast.LENGTH_SHORT).show();
+                                    WarnToast(LostAndFoundActivity.this, "取消发布");
+                                }
+                            });
+                    //添加“确定”按钮
+                    alert.setButton(DialogInterface.BUTTON_POSITIVE, "确定",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    /*******************以下向数据库保存博客********************/
+                                    PostLostAndFoundByAsync task = new PostLostAndFoundByAsync(LostAndFoundActivity.this,
+                                            Flag, describe, url, url2, location, losttime, contract, call, GlobalUserState.UserPhone);
+                                    task.execute(0);
+                                    //Toast.makeText(PostBlogActivity.this, "发布成功", Toast.LENGTH_SHORT).show();
+                                    SuccessToast(LostAndFoundActivity.this, "发布成功");
+                                }
+                            });
+                    alert.show();//显示对话框
+                }
             }
         }
     }
@@ -233,6 +248,8 @@ public class LostAndFoundActivity extends AppCompatActivity implements View.OnCl
         //path = UriUtil.getPath(mine.this, uri);
         System.out.println("测试文件上传"+data.getData());
         System.out.println("测试路径"+path);
+        path=compressImage(path);
+        System.out.println("测试压缩后的路径"+path);
         if (requestCode == 0x005) {
             AddPicture.setImageURI(uri);
             new Thread(() -> {//更新数据库
