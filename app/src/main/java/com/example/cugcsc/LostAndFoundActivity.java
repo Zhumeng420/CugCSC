@@ -2,6 +2,7 @@ package com.example.cugcsc;
 
 import static com.example.cugcsc.tool.HttpUtils.UploadImage;
 import static com.example.cugcsc.tool.toast.SuccessToast;
+import static com.example.cugcsc.tool.toast.WarnToast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,6 +37,9 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.cugcsc.UserCenter.GlobalUserState;
+import com.example.cugcsc.UserCenter.post.Async.PostLostAndFoundByAsync;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -59,6 +63,7 @@ public class LostAndFoundActivity extends AppCompatActivity implements View.OnCl
     TextView LostPlace;
     TextView ContractPeople;
     TextView PeopleCall;
+    TextView LostDescribe;
     Button LostPost;
     private DatePickerDialog dateDialog;
     private TimePickerDialog timeDialog;
@@ -99,6 +104,7 @@ public class LostAndFoundActivity extends AppCompatActivity implements View.OnCl
         PeopleCall=findViewById(R.id.phone_call);
         LostPost=findViewById(R.id.lost_submit);
         LostPost.setOnClickListener(this);
+        LostDescribe=findViewById(R.id.lost_describe);
         /*************文件读写权限*************/
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R ||
                 Environment.isExternalStorageManager()
@@ -115,13 +121,13 @@ public class LostAndFoundActivity extends AppCompatActivity implements View.OnCl
         dateDialog = new DatePickerDialog(this, (arg0, year, monthOfYear, dayOfMonth) -> {
             // 把获取的日期显示在文本框内，月份从0开始计数，所以要加1
             String text = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
-            Toast.makeText(LostAndFoundActivity.this, text, Toast.LENGTH_LONG).show();
+            //Toast.makeText(LostAndFoundActivity.this, text, Toast.LENGTH_LONG).show();
             PickTime.setText(text);
         }, year, monthOfYear, dayOfMonth);
         timeDialog = new TimePickerDialog(this, (view, hourOfDay, minute) -> {
             // TODO Auto-generated method stub
-            Toast.makeText(LostAndFoundActivity.this, hourOfDay + ":" + minute,
-                    Toast.LENGTH_LONG).show();
+            //Toast.makeText(LostAndFoundActivity.this, hourOfDay + ":" + minute,
+                    //Toast.LENGTH_LONG).show();
             PickTime.setText(PickTime.getText().toString()+" "+hourOfDay + ":" + minute);
         }, hourOfDay, minute, true); // 最后一个参数设置是否为24小时制
     }
@@ -166,7 +172,37 @@ public class LostAndFoundActivity extends AppCompatActivity implements View.OnCl
                 break;
             }
             case R.id.lost_submit:{
-
+                String describe=LostDescribe.getText().toString();
+                String location=LostPlace.getText().toString();
+                String losttime=PickTime.getText().toString();
+                String contract=ContractPeople.getText().toString();
+                String call=PeopleCall.getText().toString();
+                AlertDialog alert=new AlertDialog.Builder(this).create();
+                alert.setTitle("系统提示");//设置对话框的标题
+                alert.setMessage("是否确定发布？");//设置对话框显示的内容
+                //添加“取消”按钮
+                alert.setButton(DialogInterface.BUTTON_NEGATIVE, "取消",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog,int which) {
+                                //Toast.makeText(LostAndFoundActivity.this, "取消发布", Toast.LENGTH_SHORT).show();
+                                WarnToast(LostAndFoundActivity.this, "取消发布");
+                            }
+                        });
+                //添加“确定”按钮
+                alert.setButton(DialogInterface.BUTTON_POSITIVE, "确定",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog,int which) {
+                                /*******************以下向数据库保存博客********************/
+                                PostLostAndFoundByAsync task=new PostLostAndFoundByAsync(LostAndFoundActivity.this,
+                                        Flag,describe,url,url2,location,losttime,contract,call, GlobalUserState.UserPhone);
+                                task.execute(0);
+                                //Toast.makeText(PostBlogActivity.this, "发布成功", Toast.LENGTH_SHORT).show();
+                                SuccessToast(LostAndFoundActivity.this,"发布成功");
+                            }
+                        });
+                alert.show();//显示对话框
             }
         }
     }

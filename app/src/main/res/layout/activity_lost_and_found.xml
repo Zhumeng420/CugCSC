@@ -227,7 +227,6 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="12dp"
                     android:src="@drawable/connect"/>
-
                 <EditText
                     android:id="@+id/contract_people"
                     android:layout_width="match_parent"
@@ -242,6 +241,14 @@
                     android:textColor="@color/black"
                     android:textColorHint="#9E9696"
                     android:textSize="18sp" />
+                <ImageView
+                    android:id="@+id/post45"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="260dp"
+                    android:src="@drawable/must"/>
             </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/post5"
@@ -270,11 +277,19 @@
                     android:layout_toEndOf="@id/post55"
                     android:background="@drawable/edittext_shape06"
                     android:hint="联系电话"
+                    android:inputType="number"
                     android:paddingStart="15dp"
                     android:textColor="@color/black"
                     android:textColorHint="#9E9696"
-                    android:textSize="18sp"
-                    android:inputType="number"/>
+                    android:textSize="18sp" />
+                <ImageView
+                    android:id="@+id/post46"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="260dp"
+                    android:src="@drawable/must"/>
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
 
