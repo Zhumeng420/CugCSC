@@ -227,16 +227,18 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="12dp"
                     android:src="@drawable/connect"/>
+
                 <EditText
+                    android:id="@+id/contract_people"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="20dp"
-                    android:paddingStart="15dp"
                     android:layout_toEndOf="@id/post44"
                     android:background="@drawable/edittext_shape06"
                     android:hint="联系人"
+                    android:paddingStart="15dp"
                     android:textColor="@color/black"
                     android:textColorHint="#9E9696"
                     android:textSize="18sp" />
@@ -257,19 +259,22 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="12dp"
                     android:src="@drawable/phone"/>
+
                 <EditText
+                    android:id="@+id/phone_call"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="20dp"
-                    android:paddingStart="15dp"
                     android:layout_toEndOf="@id/post55"
                     android:background="@drawable/edittext_shape06"
                     android:hint="联系电话"
+                    android:paddingStart="15dp"
                     android:textColor="@color/black"
                     android:textColorHint="#9E9696"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:inputType="number"/>
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
 

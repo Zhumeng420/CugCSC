@@ -57,6 +57,9 @@ public class LostAndFoundActivity extends AppCompatActivity implements View.OnCl
     String url2;
     TextView PickTime;
     TextView LostPlace;
+    TextView ContractPeople;
+    TextView PeopleCall;
+    Button LostPost;
     private DatePickerDialog dateDialog;
     private TimePickerDialog timeDialog;
     private EditText editText;
@@ -92,7 +95,10 @@ public class LostAndFoundActivity extends AppCompatActivity implements View.OnCl
         PickTime.setOnClickListener(this);
         PickTime.setInputType(InputType.TYPE_NULL);
         LostPlace=findViewById(R.id.lost_place);
-        LostPlace.setOnClickListener(this);
+        ContractPeople=findViewById(R.id.lost_place);
+        PeopleCall=findViewById(R.id.phone_call);
+        LostPost=findViewById(R.id.lost_submit);
+        LostPost.setOnClickListener(this);
         /*************文件读写权限*************/
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R ||
                 Environment.isExternalStorageManager()
@@ -110,10 +116,13 @@ public class LostAndFoundActivity extends AppCompatActivity implements View.OnCl
             // 把获取的日期显示在文本框内，月份从0开始计数，所以要加1
             String text = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
             Toast.makeText(LostAndFoundActivity.this, text, Toast.LENGTH_LONG).show();
+            PickTime.setText(text);
         }, year, monthOfYear, dayOfMonth);
         timeDialog = new TimePickerDialog(this, (view, hourOfDay, minute) -> {
             // TODO Auto-generated method stub
-
+            Toast.makeText(LostAndFoundActivity.this, hourOfDay + ":" + minute,
+                    Toast.LENGTH_LONG).show();
+            PickTime.setText(PickTime.getText().toString()+" "+hourOfDay + ":" + minute);
         }, hourOfDay, minute, true); // 最后一个参数设置是否为24小时制
     }
 
@@ -152,8 +161,12 @@ public class LostAndFoundActivity extends AppCompatActivity implements View.OnCl
                 break;
             }
             case R.id.pick_time:{
-                //timeDialog.show();
+                timeDialog.show();
                 dateDialog.show();
+                break;
+            }
+            case R.id.lost_submit:{
+
             }
         }
     }
