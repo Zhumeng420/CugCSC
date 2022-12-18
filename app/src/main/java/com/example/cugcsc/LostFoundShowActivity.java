@@ -21,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -110,8 +111,15 @@ public class LostFoundShowActivity extends AppCompatActivity {
             else if (position % 2 == 1) {
                 holder.LostPicture.setImageResource(R.drawable.home);
             }*/
+            int height=mlist.get(position).picture.getHeight();
+            int width=mlist.get(position).picture.getWidth();
+            double NewHeight=(double)height/(double)width*140;
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(140*3, (int) NewHeight*3);//两个400分别为添加图片的大小
+            holder.LostPicture.setLayoutParams(params);
             holder.LostPicture.setImageBitmap(mlist.get(position).picture);
             holder.LostDescribe.setText(mlist.get(position).describes);
+            holder.LostUserName.setText(mlist.get(position).username);
+            holder.LostUserHead.setImageBitmap(mlist.get(position).head);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
