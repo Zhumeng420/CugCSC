@@ -9,9 +9,9 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 public class PostEmotion {
-    public static boolean postEmo(String phone,String title,String content) throws SQLException, ClassNotFoundException {
+    public static boolean postEmo(String table,String phone,String title,String content) throws SQLException, ClassNotFoundException {
         Connection conn=getConnection();
-        String sql = "insert into emotion(phone,title,content,post_time,visit_nums) values(?,?,?,?,?)";
+        String sql = "insert into "+table+"(phone,title,content,post_time,visit_nums) values(?,?,?,?,?)";
         PreparedStatement pstmt = conn.prepareStatement(sql);
         pstmt.setString(1, phone);
         pstmt.setString(2, title);

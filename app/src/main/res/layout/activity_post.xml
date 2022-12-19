@@ -70,6 +70,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/school_question"
         android:layout_width="match_parent"
         android:layout_height="110dp"
         android:layout_marginTop="170dp"
@@ -152,7 +153,8 @@
         android:layout_height="110dp"
         android:layout_marginTop="400dp"
         app:cardCornerRadius="20dp"
-        app:cardElevation="0dp">
+        app:cardElevation="0dp"
+        android:id="@+id/interest_communicate">
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="110dp"
@@ -189,9 +191,9 @@
         android:layout_width="match_parent"
         android:layout_height="110dp"
         android:layout_marginTop="515dp"
-
         app:cardCornerRadius="20dp"
-        app:cardElevation="0dp">
+        app:cardElevation="0dp"
+        android:id="@+id/stduy_communitcate">
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="110dp"

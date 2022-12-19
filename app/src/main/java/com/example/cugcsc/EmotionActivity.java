@@ -38,6 +38,7 @@ import android.widget.Toast;
 
 import com.example.cugcsc.UserCenter.GlobalUserState;
 import com.example.cugcsc.UserCenter.post.Async.PostEmotionByAsync;
+import com.example.cugcsc.data.PostType;
 import com.example.cugcsc.view.ColorPickerView;
 import com.example.cugcsc.view.RichEditor;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -536,7 +537,17 @@ public class EmotionActivity extends AppCompatActivity implements  View.OnClickL
                             public void onClick(DialogInterface dialog,int which) {
                                 //以下向数据库保存博客
                                 System.out.println(GlobalUserState.UserPhone);
-                                PostEmotionByAsync task=new PostEmotionByAsync(EmotionActivity.this,title_text,content, GlobalUserState.UserPhone);
+                                String table="";
+                                if(PostType.type==1){
+                                    table="school";
+                                }else if(PostType.type==2){
+                                    table="emotion";
+                                }else if(PostType.type==3){
+                                    table="interest";
+                                }else if(PostType.type==4){
+                                    table="study";
+                                }
+                                PostEmotionByAsync task=new PostEmotionByAsync(EmotionActivity.this,table,title_text,content, GlobalUserState.UserPhone);
                                 task.execute(0);
                                 SuccessToast(EmotionActivity.this, "发布成功");
                             }

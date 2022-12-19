@@ -25,6 +25,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.cugcsc.UserCenter.GlobalUserState;
+import com.example.cugcsc.data.PostType;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -34,6 +35,9 @@ public class PostActivity extends AppCompatActivity  implements View.OnClickList
     private LinearLayout BackMine;
     private CardView Emotion;
     private CardView LostAndFound;
+    private CardView SchoolQuestion;
+    private CardView InterestCommunicate;
+    private CardView StduyCommunitcate;
     //请求码，自己设置，保证 > 0并且不冲突
     private static final int MY_PERMISSION_REQUEST_CODE = 10000;
     //要申请的权限（可以一次申请多个权限），存放到数组里
@@ -78,6 +82,12 @@ public class PostActivity extends AppCompatActivity  implements View.OnClickList
         Emotion.setOnClickListener(this);
         LostAndFound=findViewById(R.id.lost_and_found);
         LostAndFound.setOnClickListener(this);
+        SchoolQuestion=findViewById(R.id.school_question);
+        SchoolQuestion.setOnClickListener(this);
+        InterestCommunicate=findViewById(R.id.interest_communicate);
+        InterestCommunicate.setOnClickListener(this);
+        StduyCommunitcate=findViewById(R.id.stduy_communitcate);
+        StduyCommunitcate.setOnClickListener(this);
         /**********申请手机权限******************/
         requestPermission(this);
     }
@@ -90,11 +100,30 @@ public class PostActivity extends AppCompatActivity  implements View.OnClickList
                 break;
             }
             case R.id.emotion_communicate:{//当情感交流分区被点击
+                PostType.type=2;
                 startActivity(new Intent(getApplicationContext(),EmotionActivity.class));//直接覆盖当前界面（减小内存开销）
                 overridePendingTransition(0,0);
                 break;
             }
-            case R.id.lost_and_found:{
+            case R.id.school_question:{//校园咨询
+                PostType.type=1;
+                startActivity(new Intent(getApplicationContext(),EmotionActivity.class));//直接覆盖当前界面（减小内存开销）
+                overridePendingTransition(0,0);
+                break;
+            }
+            case R.id.interest_communicate:{//兴趣交流
+                PostType.type=3;
+                startActivity(new Intent(getApplicationContext(),EmotionActivity.class));//直接覆盖当前界面（减小内存开销）
+                overridePendingTransition(0,0);
+                break;
+            }
+            case R.id.stduy_communitcate:{//学习交流
+                PostType.type=4;
+                startActivity(new Intent(getApplicationContext(),EmotionActivity.class));//直接覆盖当前界面（减小内存开销）
+                overridePendingTransition(0,0);
+                break;
+            }
+            case R.id.lost_and_found:{//失物招领
                 startActivity(new Intent(getApplicationContext(),LostAndFoundActivity.class));//直接覆盖当前界面（减小内存开销）
                 overridePendingTransition(0,0);
                 break;
