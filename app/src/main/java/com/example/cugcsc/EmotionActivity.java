@@ -3,6 +3,7 @@ package com.example.cugcsc;
 import static com.example.cugcsc.tool.HttpUtils.UploadImage;
 import static com.example.cugcsc.tool.toast.ErrorToast;
 import static com.example.cugcsc.tool.toast.SuccessToast;
+import static com.example.cugcsc.tool.toast.WarnToast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,6 +36,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.cugcsc.UserCenter.GlobalUserState;
+import com.example.cugcsc.UserCenter.post.Async.PostEmotionByAsync;
 import com.example.cugcsc.view.ColorPickerView;
 import com.example.cugcsc.view.RichEditor;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -513,9 +516,7 @@ public class EmotionActivity extends AppCompatActivity implements  View.OnClickL
             startActivity(intent);
         }
         else if(id == R.id.save_blog){
-            /*if(user.phone!=""){//判断用户是否已经登录
-                String title=blogTilte.getText().toString();//获取标题
-                System.out.println("测试");
+                String title_text=title.getText().toString();//获取标题
                 String content=mEditor.getHtml();//获取内容
                 AlertDialog alert=new AlertDialog.Builder(this).create();
                 alert.setTitle("系统提示");//设置对话框的标题
@@ -525,7 +526,7 @@ public class EmotionActivity extends AppCompatActivity implements  View.OnClickL
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog,int which) {
-                                Toast.makeText(this, "取消发布", Toast.LENGTH_SHORT).show();
+                                WarnToast(EmotionActivity.this, "取消发布");
                             }
                         });
                 //添加“确定”按钮
@@ -534,18 +535,13 @@ public class EmotionActivity extends AppCompatActivity implements  View.OnClickL
                             @Override
                             public void onClick(DialogInterface dialog,int which) {
                                 //以下向数据库保存博客
-                                PostBlogByAsync task=new PostBlogByAsync(PostBlogActivity.this,user.phone,title,content);
+                                System.out.println(GlobalUserState.UserPhone);
+                                PostEmotionByAsync task=new PostEmotionByAsync(EmotionActivity.this,title_text,content, GlobalUserState.UserPhone);
                                 task.execute(0);
-                                Toast.makeText(this, "发布成功", Toast.LENGTH_SHORT).show();
+                                SuccessToast(EmotionActivity.this, "发布成功");
                             }
                         });
                 alert.show();//显示对话框
-            }else{//否则提示用户登录
-                AlertDialog alert=new AlertDialog.Builder(PostBlogActivity.this).create();
-                alert.setTitle("系统提示");//设置对话框的标题
-                alert.setMessage("您尚未登录，请先登录");//设置对话框显示的内容
-                alert.show();//显示对话框
-            }*/
         } else if(id==R.id.cool){
             insertEmoj("http://81.70.13.188:9000/cugsdn/cool_1670915706169.png");
             fold();

@@ -84,7 +84,7 @@ public class LostFoundShowActivity extends AppCompatActivity {
                             intent.putExtra("url2",mlist.get(pos).url2);
                             intent.putExtra("location",mlist.get(pos).location);
                             intent.putExtra("time",mlist.get(pos).time);
-                            intent.putExtra("name",mlist.get(pos).username);
+                            intent.putExtra("name",mlist.get(pos).contract);
                             intent.putExtra("phone",mlist.get(pos).phone);
                             LostFoundShowActivity.this.startActivity(intent);
                         }

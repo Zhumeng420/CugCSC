@@ -64,6 +64,18 @@ public class MineActivity extends AppCompatActivity implements View.OnClickListe
         /**********发布模块被点击************/
         Post=findViewById(R.id.post);
         Post.setOnClickListener(this);
+        /*********设置用户名和头像**********/
+        if(GlobalUserState.UserPhone!=""){
+            UserHead=findViewById(R.id.user_head);
+            UserName=findViewById(R.id.user_name);
+            UserPhone=findViewById(R.id.user_phone);
+            UserName.setText(GlobalUserState.UserName);
+            UserPhone.setText("账号："+GlobalUserState.UserPhone);
+            Typeface type = Typeface.createFromAsset(getAssets(),"login.ttf" );//设置按钮字体
+            UserName.setTypeface(type);
+            GetHeadByAsyc task=new GetHeadByAsyc(UserHead);
+            task.execute(GlobalUserState.URL);
+        }
     }
 
     @SuppressLint("NonConstantResourceId")

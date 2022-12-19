@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class LostFoundDeatilActivity extends AppCompatActivity {
     CardView Describ;
@@ -66,18 +67,23 @@ public class LostFoundDeatilActivity extends AppCompatActivity {
         Add=findViewById(R.id.add_picture);
         Add2=findViewById(R.id.add_picture2);
         new Thread(() -> {
-            p1=getURLimage(i.getStringExtra("url"));
-            if(i.getStringExtra("url")!="https://tse1-mm.cn.bing.net/th/id/OIP-C.Orp_AQoc00mZb-e1N-c8cgD6D6?pid=ImgDet&rs=1")
+            if(!Objects.equals(i.getStringExtra("url"), "https://tse1-mm.cn.bing.net/th/id/OIP-C.Orp_AQoc00mZb-e1N-c8cgD6D6?pid=ImgDet&rs=1"))
             {
-                handler.sendEmptyMessage(1);//通知主线程更新控件
+                p1=getURLimage(i.getStringExtra("url"));
+            }else{
+                p1=getURLimage("");
             }
+            handler.sendEmptyMessage(1);//通知主线程更新控件
         }).start();
         new Thread(() -> {
-            p2=getURLimage(i.getStringExtra("url2"));
-            if(i.getStringExtra("url")!="https://tse1-mm.cn.bing.net/th/id/OIP-C.Orp_AQoc00mZb-e1N-c8cgD6D6?pid=ImgDet&rs=1")
+            if(!Objects.equals(i.getStringExtra("url2"), "https://tse1-mm.cn.bing.net/th/id/OIP-C.Orp_AQoc00mZb-e1N-c8cgD6D6?pid=ImgDet&rs=1"))
             {
-                handler.sendEmptyMessage(2);//通知主线程更新控件
+                p2=getURLimage(i.getStringExtra("url2"));
+
+            }else {
+                p2=getURLimage("");
             }
+            handler.sendEmptyMessage(2);//通知主线程更新控件
         }).start();
         LostPlace=findViewById(R.id.lost_place);
         LostPlace.setText(i.getStringExtra("location"));
