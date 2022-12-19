@@ -18,6 +18,7 @@ import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity implements  View.OnClickListener {
     ImageView LostCenter;
+    ImageView EmotionCenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +67,8 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         /********绑定事件****************/
         LostCenter=findViewById(R.id.lost_center);
         LostCenter.setOnClickListener(this);
+        EmotionCenter=findViewById(R.id.emotion_center);
+        EmotionCenter.setOnClickListener(this);
     }
 
     @Override
@@ -73,6 +76,10 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         switch (v.getId()){
             case R.id.lost_center:{//失物招领分区
                 startActivity(new Intent(getApplicationContext(),LostFoundShowActivity.class));
+                overridePendingTransition(0,0);
+            }
+            case R.id.emotion_center:{
+                startActivity(new Intent(getApplicationContext(),EmotionShowActivity.class));
                 overridePendingTransition(0,0);
             }
         }
