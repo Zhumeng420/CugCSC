@@ -22,6 +22,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CugCSC"
         tools:targetApi="31">
+        <activity android:name=".LostFoundDeatilActivity"
+            android:exported="false"/>
         <activity
             android:name=".LostFoundShowActivity"
             android:exported="false" />

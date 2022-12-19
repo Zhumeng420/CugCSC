@@ -99,7 +99,7 @@ public class LostAndFoundActivity extends AppCompatActivity implements View.OnCl
         AddPicture2.setOnClickListener(this);
         PickTime=findViewById(R.id.pick_time);
         PickTime.setOnClickListener(this);
-        PickTime.setInputType(InputType.TYPE_NULL);
+        PickTime.setInputType(InputType.TYPE_NULL);//设置不可输入
         LostPlace=findViewById(R.id.lost_place);
         ContractPeople=findViewById(R.id.lost_place);
         PeopleCall=findViewById(R.id.phone_call);
@@ -178,6 +178,7 @@ public class LostAndFoundActivity extends AppCompatActivity implements View.OnCl
             case R.id.lost_submit:{
                 if(url==null){
                     url="https://tse1-mm.cn.bing.net/th/id/OIP-C.Orp_AQoc00mZb-e1N-c8cgD6D6?pid=ImgDet&rs=1";
+
                 }
                 if(url2==null){
                     url2="https://tse1-mm.cn.bing.net/th/id/OIP-C.Orp_AQoc00mZb-e1N-c8cgD6D6?pid=ImgDet&rs=1";
