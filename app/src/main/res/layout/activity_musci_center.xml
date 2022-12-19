@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MusciCenterActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:id="@+id/serach_view"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/color_top"
+            android:clickable="true"
+            >
+            <EditText
+                android:id="@+id/search_context"
+                android:layout_width="280dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="3dp"
+                android:background="@drawable/edittext_shape01"
+                android:drawableLeft="?android:attr/actionModeWebSearchDrawable"
+                android:ems="10"
+                android:hint="请输入搜索内容"
+                android:inputType="textPersonName"
+                android:paddingStart="15dp"
+                android:singleLine="true"
+                android:textColorHint="#9921329A" />
+
+            <android.widget.Button
+                android:id="@+id/search_button"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@+id/search_context"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/edittext_shape01"
+                android:gravity="center"
+                android:text="@string/serach"
+                android:textColor="@color/black"
+                android:textSize="24sp" />
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/music_list"
+            android:layout_width="match_parent"
+            android:layout_height="682dp"
+            android:background="@color/white" />
+    </LinearLayout>
+</RelativeLayout>

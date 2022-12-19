@@ -2,6 +2,7 @@ package com.example.cugcsc;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -14,8 +15,8 @@ import android.widget.Button;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-public class LibraryActivity extends AppCompatActivity {
-
+public class LibraryActivity extends AppCompatActivity  implements  View.OnClickListener{
+    private CardView MusicCenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,5 +62,19 @@ public class LibraryActivity extends AppCompatActivity {
         v.getBackground().setAlpha(40);//0~255透明度值 ，0为完全透明，255为不透明
         v = findViewById(R.id.content_view2);
         v.getBackground().setAlpha(160);//0~255透明度值 ，0为完全透明，255为不透明
+        /*******绑定点击事件***********/
+        MusicCenter=findViewById(R.id.music_center);
+        MusicCenter.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.music_center:{
+                startActivity(new Intent(getApplicationContext(),MusciCenterActivity.class));
+                overridePendingTransition(0,0);
+                break;
+            }
+        }
     }
 }
