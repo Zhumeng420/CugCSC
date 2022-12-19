@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.cugcsc.data.EmoData;
+import com.example.cugcsc.data.PostType;
 
 import java.io.ByteArrayOutputStream;
 import java.sql.SQLException;
@@ -48,16 +49,52 @@ public class EmotionShowActivity extends AppCompatActivity {
                 DividerItemDecoration(this,DividerItemDecoration.VERTICAL);
         mRecyclerView.addItemDecoration(mDivider);
         /********读取数据***********/
-        new Thread(() -> {
-            try {
-                getEmotion(mList);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-            handler.sendEmptyMessage(1);//通知主线程更新控件
-        }).start();
+        if(PostType.type==1){
+            new Thread(() -> {
+                try {
+                    getEmotion(mList,"school");
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                handler.sendEmptyMessage(1);//通知主线程更新控件
+            }).start();
+        }else if(PostType.type==2){
+            new Thread(() -> {
+                try {
+                    getEmotion(mList,"emotion");
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                handler.sendEmptyMessage(1);//通知主线程更新控件
+            }).start();
+        }else if(PostType.type==3){
+            new Thread(() -> {
+                try {
+                    getEmotion(mList,"interest");
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                handler.sendEmptyMessage(1);//通知主线程更新控件
+            }).start();
+        }else if(PostType.type==4){
+            new Thread(() -> {
+                try {
+                    getEmotion(mList,"study");
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                handler.sendEmptyMessage(1);//通知主线程更新控件
+            }).start();
+        }
+
     }
     class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHoder> {
         private Context context;

@@ -15,10 +15,10 @@ import java.sql.Statement;
 import java.util.List;
 
 public class GetEmotion {
-    public static Boolean  getEmotion(List<EmoData> result) throws SQLException, ClassNotFoundException {
+    public static Boolean  getEmotion(List<EmoData> result,String table) throws SQLException, ClassNotFoundException {
         Connection conn = getConnection();
         Statement stmt = conn.createStatement();
-        String sql = "select * from emotion";
+        String sql = "select * from "+table;
         ResultSet rs = stmt.executeQuery(sql);
         //rs.beforeFirst();
         while(rs.next()){

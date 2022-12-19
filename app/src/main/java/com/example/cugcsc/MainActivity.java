@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.cugcsc.data.PostType;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -19,6 +20,9 @@ import com.google.android.material.navigation.NavigationBarView;
 public class MainActivity extends AppCompatActivity implements  View.OnClickListener {
     ImageView LostCenter;
     ImageView EmotionCenter;
+    ImageView StudyCenter;
+    ImageView QuestionCenter;
+    ImageView InterestCenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,18 +73,46 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         LostCenter.setOnClickListener(this);
         EmotionCenter=findViewById(R.id.emotion_center);
         EmotionCenter.setOnClickListener(this);
+        StudyCenter=findViewById(R.id.study_center);
+        StudyCenter.setOnClickListener(this);
+        QuestionCenter=findViewById(R.id.question_center);
+        QuestionCenter.setOnClickListener(this);
+        InterestCenter=findViewById(R.id.interest_center);
+        InterestCenter.setOnClickListener(this);
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.lost_center:{//失物招领分区
                 startActivity(new Intent(getApplicationContext(),LostFoundShowActivity.class));
                 overridePendingTransition(0,0);
+                break;
             }
             case R.id.emotion_center:{
+                PostType.type=2;
                 startActivity(new Intent(getApplicationContext(),EmotionShowActivity.class));
                 overridePendingTransition(0,0);
+                break;
+            }
+            case R.id.study_center:{
+                PostType.type=4;
+                startActivity(new Intent(getApplicationContext(),EmotionShowActivity.class));
+                overridePendingTransition(0,0);
+                break;
+            }
+            case R.id.interest_center:{
+                PostType.type=3;
+                startActivity(new Intent(getApplicationContext(),EmotionShowActivity.class));
+                overridePendingTransition(0,0);
+                break;
+            }
+            case R.id.question_center:{
+                PostType.type=1;
+                startActivity(new Intent(getApplicationContext(),EmotionShowActivity.class));
+                overridePendingTransition(0,0);
+                break;
             }
         }
     }
