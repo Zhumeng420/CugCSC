@@ -72,12 +72,13 @@
 
     <RelativeLayout
         android:id="@+id/post"
-        android:layout_marginTop="110dp"
         android:layout_width="match_parent"
         android:layout_height="65dp"
+        android:layout_marginTop="110dp"
         android:background="#FFFFFF"
         android:clickable="true"
         android:paddingLeft="12dp">
+
         <ImageView
             android:id="@+id/post2"
             android:layout_width="26dp"
@@ -85,7 +86,8 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="12dp"
-            android:src="@drawable/post2"/>
+            android:src="@drawable/post2" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

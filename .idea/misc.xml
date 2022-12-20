@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/CugCSC2/app/src/main/res/drawable/audio_seekbar_progress.xml" value="0.359" />
         <entry key="..\:/CugCSC2/app/src/main/res/drawable/color_button.xml" value="0.3095" />
+        <entry key="..\:/CugCSC2/app/src/main/res/drawable/color_button2.xml" value="0.359" />
         <entry key="..\:/CugCSC2/app/src/main/res/drawable/color_top.xml" value="0.4025" />
         <entry key="..\:/CugCSC2/app/src/main/res/drawable/edittext_shape01.xml" value="0.1" />
         <entry key="..\:/CugCSC2/app/src/main/res/drawable/edittext_shape02.xml" value="0.3095" />
@@ -29,7 +30,7 @@
         <entry key="..\:/CugCSC2/app/src/main/res/layout/activity_message.xml" value="0.3927083333333333" />
         <entry key="..\:/CugCSC2/app/src/main/res/layout/activity_mine.xml" value="0.40729166666666666" />
         <entry key="..\:/CugCSC2/app/src/main/res/layout/activity_musci_center.xml" value="0.5536458333333333" />
-        <entry key="..\:/CugCSC2/app/src/main/res/layout/activity_music_play.xml" value="0.5390625" />
+        <entry key="..\:/CugCSC2/app/src/main/res/layout/activity_music_play.xml" value="0.33" />
         <entry key="..\:/CugCSC2/app/src/main/res/layout/activity_post.xml" value="0.5536458333333333" />
         <entry key="..\:/CugCSC2/app/src/main/res/layout/activity_show_diarys.xml" value="0.5536458333333333" />
         <entry key="..\:/CugCSC2/app/src/main/res/layout/bottom_sheet.xml" value="0.5526041666666667" />

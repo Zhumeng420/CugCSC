@@ -3,6 +3,7 @@ package com.example.cugcsc;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.annotation.SuppressLint;
 import android.media.AudioManager;
@@ -11,10 +12,16 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.example.cugcsc.tool.LrcView.Lrc;
+import com.example.cugcsc.tool.LrcView.LrcHelper;
+import com.example.cugcsc.tool.LrcView.LrcView;
 import com.example.cugcsc.tool.download.DownloadConfiguration;
 import com.example.cugcsc.tool.download.DownloadManager;
 import com.example.cugcsc.tool.download.FileDownloadTask;
@@ -25,6 +32,7 @@ import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ScheduledExecutorService;
@@ -36,11 +44,15 @@ public class MusicPlayActivity extends AppCompatActivity implements View.OnClick
     private Timer timer = new Timer(); // 计时器
     private boolean isPrepare = false;
     private SeekBar seekBar;
-    private static final String PATH = "http://81.70.13.188:9000/cugsdn/Fire_1671463189424.mp3";
+    private static final String PATH = "http://81.70.13.188:9000/cugsdn/平行恋人 (女版)-刘至佳_1671458082656.mp3";
     private static final String PATH2 = "http://file.kuyinyun.com/group1/M00/90/B7/rBBGdFPXJNeAM-nhABeMElAM6bY151.mp3";
     private TextView tvCurrent;
     private TextView tvDuration;
     private Button btnPlay;
+    private CardView MusicPicture;
+    private Animation animation;//用于控制画面旋转
+    private LrcView mLrcView;//歌词显示
+    /******线程池调度服务******/
     public static ScheduledExecutorService executorService = new ScheduledThreadPoolExecutor(5,
             new BasicThreadFactory.Builder().namingPattern("example-schedule-pool-%d")
                     .daemon(true).build());
@@ -48,7 +60,7 @@ public class MusicPlayActivity extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_music_play);
-
+        /**********初始化线程池***************/
         DownloadConfiguration downloadConfiguration = new DownloadConfiguration.Builder(getApplicationContext())
                 .setCacheDir(getExternalCacheDir())        //设置下载缓存目录，必须设置
                 .setTaskExecutor(executorService)    //同上传类似
@@ -56,7 +68,21 @@ public class MusicPlayActivity extends AppCompatActivity implements View.OnClick
                 .setThreadPoolCoreSize(5)  //同上传类似
                 .build();
         DownloadManager.getInstance(this).init(downloadConfiguration);
-
+        /**********歌词控件*****************/
+        ///歌词控件
+        List<Lrc> lrcs = LrcHelper.parseLrcFromAssets(this, "test.lrc");//加载歌词文件
+        mLrcView = findViewById(R.id.lrc_view);
+        mLrcView.setLrcData(lrcs);
+        mLrcView.setOnPlayIndicatorLineListener(new LrcView.OnPlayIndicatorLineListener() {
+            @Override
+            public void onPlay(long time, String content) {
+                mediaPlayer.seekTo((int) time);
+            }
+        });
+        /**********绑定控件**************/
+        MusicPicture=findViewById(R.id.music_picture);
+        View v =findViewById(R.id.music_picture);//设置透明，只留下圆形图片
+        v.getBackground().setAlpha(0);//0~255透明度值 ，0为完全透明，255为不透明
         seekBar = findViewById(R.id.seekBar);
         tvCurrent = findViewById(R.id.tv_current);
         tvDuration = findViewById(R.id.tv_duration);
@@ -68,12 +94,25 @@ public class MusicPlayActivity extends AppCompatActivity implements View.OnClick
                 if (mediaPlayer.isPlaying()) {
                     mediaPlayer.pause();
                     btnPlay.setText("继续");
+                    MusicPicture.clearAnimation();
+
+                    mLrcView.pause();//歌词暂停
+
                 } else {
+                    /*******设置图片选择动画*********/
+                    animation = AnimationUtils.loadAnimation(MusicPlayActivity.this, R.anim.img_animation);
+                    LinearInterpolator lin = new LinearInterpolator();//设置动画匀速运动
+                    animation.setInterpolator(lin);
+                    MusicPicture.startAnimation(animation);
+                    /*******音乐开始播放*********/
                     play();
                     btnPlay.setText("暂停");
+
+                    mLrcView.resume();//歌词继续
                 }
             }
         });
+        /*******初始化进度条**********/
         seekBar.setProgress(0);//设置进度为0
         seekBar.setSecondaryProgress(0);//设置缓冲进度为0
         seekBar.setEnabled(false);
@@ -81,22 +120,31 @@ public class MusicPlayActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onProgressChanged(SeekBar mSeekBar, int progress, boolean fromUser) {
                 tvCurrent.setText(getTime(mSeekBar.getProgress()));
-            }
 
+                int currentPosition = mediaPlayer.getCurrentPosition();//更新歌词
+                mLrcView.updateTime(currentPosition);
+            }
             @Override
             public void onStartTrackingTouch(SeekBar mSeekBar) {
 
             }
-
             @Override
             public void onStopTrackingTouch(SeekBar mSeekBar) {
                 if (mediaPlayer.isPlaying()) {
+                    /******音乐播放*******/
                     mediaPlayer.seekTo(mSeekBar.getProgress());
                     tvCurrent.setText(getTime(mSeekBar.getProgress()));
+
+                    int currentPosition = mediaPlayer.getCurrentPosition();//更新歌词
+                    mLrcView.updateTime(currentPosition);
                 } else {
                     if (isPrepare) {
                         mediaPlayer.seekTo(mSeekBar.getProgress());
                         tvCurrent.setText(getTime(mSeekBar.getProgress()));
+
+                        int currentPosition = mediaPlayer.getCurrentPosition();//更新歌词
+                        mLrcView.updateTime(currentPosition);
+
                         mediaPlayer.start();
                         btnPlay.setText("暂停");
                     }
@@ -114,12 +162,11 @@ public class MusicPlayActivity extends AppCompatActivity implements View.OnClick
         }
         // 每一秒触发一次
         timer.schedule(timerTask, 0, 1000);
-
         init(PATH);
     }
 
-    TimerTask timerTask = new TimerTask() {
 
+    TimerTask timerTask = new TimerTask() {
         @Override
         public void run() {
             if (mediaPlayer == null) {
@@ -156,7 +203,6 @@ public class MusicPlayActivity extends AppCompatActivity implements View.OnClick
             public void onDownloadFailed(FileDownloadTask task, int errorType, String msg) {
                 Log.e(TAG, "ERR: " + msg);
             }
-
             @Override
             public void onDownloadSucc(FileDownloadTask task, File outFile) {
                 Log.e(TAG, "file : " + outFile.getAbsolutePath());
