@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
@@ -87,7 +88,7 @@ public class MusciCenterActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     //点击条目进行跳转
-                    /*Intent intent = new Intent(context, HtmlForBlogDetail.class);
+                    Intent intent = new Intent(context, MusicPlayActivity.class);
                     /*************以下增加该帖子的访问量**************/
                     /*new Thread(() -> {
                         try {
@@ -106,9 +107,9 @@ public class MusciCenterActivity extends AppCompatActivity {
                     intent.putExtra("diarys",data.get(position).content);
                     intent.putExtra("head",Bitmap2Bytes(data.get(position).head));
                     intent.putExtra("like_nums",data.get(position).like_nums);
-                    intent.putExtra("collect_nums",data.get(position).collect_nums);
+                    intent.putExtra("collect_nums",data.get(position).collect_nums);*/
                     context.startActivity(intent);
-                    //Toast.makeText(context, "click" + position, Toast.LENGTH_SHORT).show();*/
+                    //Toast.makeText(context, "click" + position, Toast.LENGTH_SHORT).show();
                 }
             });
         }
