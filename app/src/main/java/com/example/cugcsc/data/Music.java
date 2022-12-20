@@ -8,4 +8,5 @@ public class Music {
     public String picture;
     public Bitmap pic;
     public String url;
+    public String lrc;
 }

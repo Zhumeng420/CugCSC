@@ -6,6 +6,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -13,6 +14,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -53,6 +55,37 @@ public class HttpUtils {
             e.printStackTrace();
         }
         return  json;
+    }
+    public File download(String path) {
+        String downLoadUrl = path;
+        try {
+            // 构造URL
+            URL url = new URL(downLoadUrl);
+            // 打开连接
+            URLConnection con = url.openConnection();
+            // 输入流
+            InputStream is = con.getInputStream();
+            // 1K的数据缓冲
+            byte[] bs = new byte[1024];
+            // 读取到的数据长度
+            int len;
+            //图片的完整路径
+            String filename = "temp.lrc";
+            // 输出的文件流
+            File file = new File(filename);
+            FileOutputStream os = new FileOutputStream(file, true);
+            // 开始读取
+            while ((len = is.read(bs)) != -1) {
+                os.write(bs, 0, len);
+            }
+            // 完毕，关闭所有链接
+            os.close();
+            is.close();
+            return file;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public static String UploadImage(String path){

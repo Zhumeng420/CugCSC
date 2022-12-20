@@ -6,6 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -16,6 +19,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -44,14 +48,19 @@ public class MusicPlayActivity extends AppCompatActivity implements View.OnClick
     private Timer timer = new Timer(); // 计时器
     private boolean isPrepare = false;
     private SeekBar seekBar;
-    private static final String PATH = "http://81.70.13.188:9000/cugsdn/平行恋人 (女版)-刘至佳_1671458082656.mp3";
-    private static final String PATH2 = "http://file.kuyinyun.com/group1/M00/90/B7/rBBGdFPXJNeAM-nhABeMElAM6bY151.mp3";
+    private static  String PATH = "http://81.70.13.188:9000/cugsdn/平行恋人 (女版)-刘至佳_1671458082656.mp3";
+    private static  String PATH2 = "http://81.70.13.188:9000/cugsdn/平行恋人 (女版)-刘至佳_1671541207394.lrc";
+
     private TextView tvCurrent;
     private TextView tvDuration;
     private Button btnPlay;
     private CardView MusicPicture;
     private Animation animation;//用于控制画面旋转
     private LrcView mLrcView;//歌词显示
+    private byte[] buff;//用于旋转的图标显示
+    private ImageView pic;//显示旋转图片
+    private TextView song;
+    private TextView singer;
     /******线程池调度服务******/
     public static ScheduledExecutorService executorService = new ScheduledThreadPoolExecutor(5,
             new BasicThreadFactory.Builder().namingPattern("example-schedule-pool-%d")
@@ -68,17 +77,6 @@ public class MusicPlayActivity extends AppCompatActivity implements View.OnClick
                 .setThreadPoolCoreSize(5)  //同上传类似
                 .build();
         DownloadManager.getInstance(this).init(downloadConfiguration);
-        /**********歌词控件*****************/
-        ///歌词控件
-        List<Lrc> lrcs = LrcHelper.parseLrcFromAssets(this, "test.lrc");//加载歌词文件
-        mLrcView = findViewById(R.id.lrc_view);
-        mLrcView.setLrcData(lrcs);
-        mLrcView.setOnPlayIndicatorLineListener(new LrcView.OnPlayIndicatorLineListener() {
-            @Override
-            public void onPlay(long time, String content) {
-                mediaPlayer.seekTo((int) time);
-            }
-        });
         /**********绑定控件**************/
         MusicPicture=findViewById(R.id.music_picture);
         View v =findViewById(R.id.music_picture);//设置透明，只留下圆形图片
@@ -87,6 +85,9 @@ public class MusicPlayActivity extends AppCompatActivity implements View.OnClick
         tvCurrent = findViewById(R.id.tv_current);
         tvDuration = findViewById(R.id.tv_duration);
         btnPlay = findViewById(R.id.btn_play);
+        pic=findViewById(R.id.user_head);
+        song=findViewById(R.id.song);
+        singer=findViewById(R.id.singer);
         btnPlay.setEnabled(false);
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,7 +96,6 @@ public class MusicPlayActivity extends AppCompatActivity implements View.OnClick
                     mediaPlayer.pause();
                     btnPlay.setText("继续");
                     MusicPicture.clearAnimation();
-
                     mLrcView.pause();//歌词暂停
 
                 } else {
@@ -112,6 +112,16 @@ public class MusicPlayActivity extends AppCompatActivity implements View.OnClick
                 }
             }
         });
+        /***********接受数据**************/
+        Intent i=getIntent();
+        buff=i.getByteArrayExtra("pic");
+        pic.setImageBitmap(BitmapFactory.decodeByteArray(buff,0,buff.length));//设置旋转图片
+        PATH=i.getStringExtra("url");
+        PATH2=i.getStringExtra("lrc");
+        song.setText(i.getStringExtra("song"));
+        singer.setText(i.getStringExtra("singer"));
+        System.out.println(PATH);
+        System.out.println(PATH2);
         /*******初始化进度条**********/
         seekBar.setProgress(0);//设置进度为0
         seekBar.setSecondaryProgress(0);//设置缓冲进度为0
@@ -162,7 +172,7 @@ public class MusicPlayActivity extends AppCompatActivity implements View.OnClick
         }
         // 每一秒触发一次
         timer.schedule(timerTask, 0, 1000);
-        init(PATH);
+        init(PATH,PATH2);
     }
 
 
@@ -195,9 +205,9 @@ public class MusicPlayActivity extends AppCompatActivity implements View.OnClick
     /**
      * @param url url地址
      */
-    public void init(String url) {
+    public void init(String url,String url2) {
         //下载和在线播放同步进行，因为音频文件受网速和大小影响，不能确定哪种方法能最快速播放，当下载完在线播放还没能开始时，就可以使用下载文件播放了
-        //①下载
+        //①下载歌曲
         DownloadManager.getInstance(this).downloadFile(FileType.TYPE_AUDIO, "111", url, new OnDownloadingListener() {
             @Override
             public void onDownloadFailed(FileDownloadTask task, int errorType, String msg) {
@@ -209,6 +219,7 @@ public class MusicPlayActivity extends AppCompatActivity implements View.OnClick
                 if (!isPrepare) {
                     seekBar.setSecondaryProgress(seekBar.getMax());
                     try {
+                        /****音乐播放****/
                         mediaPlayer.reset();
                         mediaPlayer.setDataSource(outFile.getAbsolutePath());
                         mediaPlayer.prepareAsync();
@@ -219,6 +230,39 @@ public class MusicPlayActivity extends AppCompatActivity implements View.OnClick
                     } catch (IllegalStateException e) {
                         e.printStackTrace();
                     } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+        //下载歌词
+        DownloadManager.getInstance(this).downloadFile(FileType.TYPE_AUDIO, "112", url2, new OnDownloadingListener() {
+            @Override
+            public void onDownloadFailed(FileDownloadTask task, int errorType, String msg) {
+                Log.e(TAG, "ERR: " + msg);
+            }
+            @Override
+            public void onDownloadSucc(FileDownloadTask task, File outFile) {
+                Log.e(TAG, "file : " + outFile.getAbsolutePath());
+                if (!isPrepare) {
+                    try {
+                        /**********歌词控件*****************/
+                        ///歌词控件
+                        //List<Lrc> lrcs = LrcHelper.parseLrcFromAssets(this, "test.lrc");//加载歌词文件
+                        List<Lrc> lrcs = LrcHelper.parseLrcFromFile(new File(outFile.getAbsolutePath()));
+                        mLrcView = findViewById(R.id.lrc_view);
+                        mLrcView.setLrcData(lrcs);
+                        mLrcView.setOnPlayIndicatorLineListener(new LrcView.OnPlayIndicatorLineListener() {
+                            @Override
+                            public void onPlay(long time, String content) {
+                                mediaPlayer.seekTo((int) time);
+                            }
+                        });
+                    } catch (IllegalArgumentException e) {
+                        e.printStackTrace();
+                    } catch (SecurityException e) {
+                        e.printStackTrace();
+                    } catch (IllegalStateException e) {
                         e.printStackTrace();
                     }
                 }
@@ -268,7 +312,7 @@ public class MusicPlayActivity extends AppCompatActivity implements View.OnClick
         btnPlay.setText("开始");
         tvCurrent.setText("00:00:00");
         seekBar.setProgress(0);
-        init(PATH);
+        init(PATH,PATH2);
     }
 
     @Override

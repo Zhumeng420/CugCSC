@@ -89,25 +89,12 @@ public class MusciCenterActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     //点击条目进行跳转
                     Intent intent = new Intent(context, MusicPlayActivity.class);
-                    /*************以下增加该帖子的访问量**************/
-                    /*new Thread(() -> {
-                        try {
-                            addVisitNums(news.id);
-                        } catch (SQLException e) {
-                            e.printStackTrace();
-                        } catch (ClassNotFoundException e) {
-                            e.printStackTrace();
-                        }
-                        handler.sendEmptyMessage(1);//通知主线程更新控件
-                    }).start();
                     /***********以下为activity之间的数据传输**********/
-                   /* intent.putExtra("id",data.get(position).id);
-                    intent.putExtra("title",data.get(position).title);
-                    intent.putExtra("name",data.get(position).name);
-                    intent.putExtra("diarys",data.get(position).content);
-                    intent.putExtra("head",Bitmap2Bytes(data.get(position).head));
-                    intent.putExtra("like_nums",data.get(position).like_nums);
-                    intent.putExtra("collect_nums",data.get(position).collect_nums);*/
+                    intent.putExtra("pic",Bitmap2Bytes(data.get(position).pic));
+                    intent.putExtra("url",data.get(position).url);
+                    intent.putExtra("lrc",data.get(position).lrc);
+                    intent.putExtra("song",data.get(position).song);
+                    intent.putExtra("singer",data.get(position).singer);
                     context.startActivity(intent);
                     //Toast.makeText(context, "click" + position, Toast.LENGTH_SHORT).show();
                 }

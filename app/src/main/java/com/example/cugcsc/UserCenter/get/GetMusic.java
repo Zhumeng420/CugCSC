@@ -26,8 +26,9 @@ public class GetMusic {
             temp.song = rs.getString("song");
             temp.singer= rs.getString("singer");
             temp.picture=rs.getString("picture");
-            temp.picture=rs.getString("url");
+            temp.url=rs.getString("url");
             temp.pic=getURLimage(rs.getString("picture"));
+            temp.lrc=rs.getString("lrc");
             result.add(temp);
         }
         rs.close();
