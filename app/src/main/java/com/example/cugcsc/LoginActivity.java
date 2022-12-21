@@ -4,6 +4,7 @@ import static com.example.cugcsc.tool.toast.ErrorToast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
@@ -68,6 +69,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     System.out.println(Phone.getText().toString());
                     task.execute(Phone.getText().toString(),Password.getText().toString());
                 }
+            }
+            case R.id.code_login:{//验证码登录
+                startActivity(new Intent(getApplicationContext(),CodeLoginActivity.class));
+                overridePendingTransition(0,0);
             }
         }
     }
