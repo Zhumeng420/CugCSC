@@ -1,12 +1,20 @@
 package com.example.cugcsc;
 
+import static com.example.cugcsc.tool.HttpUtils.UploadImage;
 import static com.example.cugcsc.tool.toast.ErrorToast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
+import android.content.ContentUris;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.provider.DocumentsContract;
+import android.provider.MediaStore;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
@@ -17,6 +25,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.example.cugcsc.UserCenter.login.Async.LoginAsyncTaskByPassword;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
     private Button Login;
@@ -26,6 +37,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private TextView CodeLogin;
     private ImageView SeePass;
     private Boolean seepass=false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

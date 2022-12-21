@@ -50,6 +50,19 @@ public class Register {
         conn.close();
     }
 
+    public static void changeHead(String phone,String newurl) throws SQLException, ClassNotFoundException {
+        Connection conn = getConnection();
+        Statement stmt = conn.createStatement();
+        String sql = "UPDATE user set head=? where phone=?" ;
+        PreparedStatement psmt=null;
+        psmt=conn.prepareStatement(sql);
+        psmt.setString(1,newurl);
+        psmt.setString(2,phone);
+        psmt.executeUpdate();
+        stmt.close();
+        conn.close();
+    }
+
     /**
      * 修改用户名
      * @param phone

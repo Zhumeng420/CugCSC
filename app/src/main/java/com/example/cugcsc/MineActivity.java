@@ -1,6 +1,9 @@
 package com.example.cugcsc;
 
+import static com.example.cugcsc.UserCenter.get.GetLostAndFound.GetLostFound;
+import static com.example.cugcsc.UserCenter.post.BasicApi.Register.changeHead;
 import static com.example.cugcsc.UserCenter.post.BasicApi.Register.changeUsername;
+import static com.example.cugcsc.tool.HttpUtils.UploadImage;
 import static com.example.cugcsc.tool.toast.SuccessToast;
 import static com.example.cugcsc.tool.toast.WarnToast;
 
@@ -10,13 +13,18 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.ContentUris;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.DocumentsContract;
+import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -30,6 +38,8 @@ import com.example.cugcsc.UserCenter.GlobalUserState;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.Objects;
 
@@ -39,6 +49,8 @@ public class MineActivity extends AppCompatActivity implements View.OnClickListe
     private TextView UserName;
     private TextView UserPhone;
     private RelativeLayout Post;
+    private String path;
+    private String url;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -145,12 +157,19 @@ public class MineActivity extends AppCompatActivity implements View.OnClickListe
                 });
                 AlertDialog dialog=builder.create();
                 dialog.show();
+                break;
             }
             case R.id.user_head:{//更换头像
-
+                /******打开图片选择器**********/
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/*");
+                this.startActivityForResult(intent, 0x005);
+                break;
             }
         }
     }
+
+
 
     //handler为线程之间通信的桥梁
     @SuppressLint("HandlerLeak")
@@ -162,11 +181,25 @@ public class MineActivity extends AppCompatActivity implements View.OnClickListe
                 case 1:
                     SuccessToast(MineActivity.this,"修改成功");
                     UserName.setText(GlobalUserState.UserName);
+                    break;
+                case 2:{
+                    GlobalUserState.URL=url;//更新头像url
+                    new Thread(() -> {
+                        try {
+                            changeHead(GlobalUserState.UserPhone,url);
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        } catch (ClassNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                        handler.sendEmptyMessage(1);//通知主线程更新控件
+                    }).start();
+                    break;
+                }
                 default :
                     break;
             }
         }
-
     };
 
     @SuppressLint({"SetTextI18n", "Range"})
@@ -183,6 +216,50 @@ public class MineActivity extends AppCompatActivity implements View.OnClickListe
             UserName.setTypeface(type);
             GetHeadByAsyc task=new GetHeadByAsyc(UserHead);
             task.execute(GlobalUserState.URL);
+        } else if (requestCode == 0x005) {
+            if (data == null) {
+                // 用户未选择任何文件，直接返回
+                return;
+            }
+            /******************以下根据Uri获取文件的真实路径********************************/
+            Uri uri = data.getData(); // 获取用户选择文件的URI
+            if (DocumentsContract.isDocumentUri(this, uri)) {
+                String docId = DocumentsContract.getDocumentId(uri);
+                if ("com.android.providers.media.documents".equals(uri.getAuthority())) {
+                    String id = docId.split(":")[1];
+                    String selection = MediaStore.Images.Media._ID + "=" + id;
+                    path = getImagePath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, selection);
+                } else if ("com.android.providers.downloads.documents".equals(uri.getAuthority())) {
+                    Uri contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), Long.valueOf(docId));
+                    path = getImagePath(contentUri, null);
+                }
+            } else if ("content".equalsIgnoreCase(uri.getScheme())) {
+                path = getImagePath(uri, null);
+            } else if ("file".equalsIgnoreCase(uri.getScheme())) {
+                path = uri.getPath();
+            }
+            //path = UriUtil.getPath(mine.this, uri);
+            System.out.println("测试文件上传"+data.getData());
+            System.out.println("测试路径"+path);
+            UserHead.setImageURI(uri);//更新图像
+            new Thread(() -> {//更新数据库
+                url=UploadImage(path);
+                handler.sendEmptyMessage(2);//通知主线程更新控件
+            }).start();
+            //mEditor.insertImage(ImageUrl.image_url, "dachshund");
         }
+    }
+
+    @SuppressLint("Range")
+    private String getImagePath(Uri uri, String selection) {
+        String path = null;
+        Cursor cursor = getContentResolver().query(uri, null, selection, null, null);
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
+            }
+            cursor.close();
+        }
+        return path;
     }
 }
