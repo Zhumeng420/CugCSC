@@ -13,11 +13,13 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -39,6 +41,10 @@ public class MusciCenterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_musci_center);
+        /********搜索按钮更改字体*********/
+        Button SearchButton=findViewById(R.id.search_button);
+        Typeface type = Typeface.createFromAsset(getAssets(),"search.otf" );//设置按钮字体
+        SearchButton.setTypeface(type);
         /*********设置横向列表**********/
         mRecyclerView = findViewById(R.id.music_list);
         //设置垂直布局

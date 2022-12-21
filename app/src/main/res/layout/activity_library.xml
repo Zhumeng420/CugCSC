@@ -80,7 +80,7 @@
             android:layout_marginTop="60dp"
             />
         <androidx.cardview.widget.CardView
-            android:id="@+id/lost_card"
+            android:id="@+id/movie_center"
             android:layout_width="45dp"
             android:layout_height="45dp"
             app:cardCornerRadius="10dp"
@@ -89,7 +89,6 @@
             android:layout_marginStart="110dp"
             android:paddingBottom="15dp">
             <ImageView
-                android:id="@+id/lost_center"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_marginLeft="0dp"

@@ -17,6 +17,7 @@ import com.google.android.material.navigation.NavigationBarView;
 
 public class LibraryActivity extends AppCompatActivity  implements  View.OnClickListener{
     private CardView MusicCenter;
+    private CardView MovieCenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +66,8 @@ public class LibraryActivity extends AppCompatActivity  implements  View.OnClick
         /*******绑定点击事件***********/
         MusicCenter=findViewById(R.id.music_center);
         MusicCenter.setOnClickListener(this);
+        MovieCenter=findViewById(R.id.movie_center);
+        MovieCenter.setOnClickListener(this);
     }
 
     @Override
@@ -72,6 +75,11 @@ public class LibraryActivity extends AppCompatActivity  implements  View.OnClick
         switch (v.getId()){
             case R.id.music_center:{
                 startActivity(new Intent(getApplicationContext(),MusciCenterActivity.class));
+                overridePendingTransition(0,0);
+                break;
+            }
+            case R.id.movie_center:{
+                startActivity(new Intent(getApplicationContext(),MovieCenterActivity.class));
                 overridePendingTransition(0,0);
                 break;
             }
