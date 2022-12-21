@@ -1,7 +1,10 @@
 package com.example.cugcsc;
 
+import static com.example.cugcsc.UserCenter.post.BasicApi.Register.register;
 import static com.example.cugcsc.tool.toast.ErrorToast;
+import static com.example.cugcsc.tool.toast.SuccessToast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Typeface;
@@ -15,6 +18,7 @@ import android.widget.TextView;
 
 import com.example.cugcsc.UserCenter.login.Async.SendCodeAsyn;
 
+import java.sql.SQLException;
 import java.util.Objects;
 import java.util.Random;
 
@@ -87,6 +91,16 @@ public class RegisterActivity extends AppCompatActivity  implements View.OnClick
                     ErrorToast(this,"密码不得小于八位");
                 }else if(!Password1.getText().toString().equals(Password2.getText().toString())){
                     ErrorToast(this,"两次密码不一致");
+                }else{//向数据库插入账号
+                    new Thread(() -> {
+                        try {
+                            register(UserPhone.getText().toString(), Password1.getText().toString());
+                        } catch (SQLException | ClassNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                    }).start();
+                    SuccessToast(this,"注册成功");
+                    finish();
                 }
             }
         }

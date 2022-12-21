@@ -77,14 +77,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     System.out.println(Phone.getText().toString());
                     task.execute(Phone.getText().toString(),Password.getText().toString());
                 }
+                break;
             }
             case R.id.code_login:{//验证码登录
                 startActivity(new Intent(getApplicationContext(),CodeLoginActivity.class));
                 overridePendingTransition(0,0);
+                break;
             }
             case R.id.register:{//注册
                 startActivity(new Intent(getApplicationContext(),RegisterActivity.class));
                 overridePendingTransition(0,0);
+                break;
             }
             case R.id.see_pass:{
                 if (!seepass){
@@ -96,7 +99,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     SeePass.setImageResource(R.drawable.seepas);
                     seepass=false;
                 }
-
+                break;
             }
         }
     }
