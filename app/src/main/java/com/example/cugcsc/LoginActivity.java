@@ -23,8 +23,15 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import com.example.cugcsc.UserCenter.login.Async.LoginAsyncTaskByPassword;
 
+import com.example.cugcsc.UserCenter.GlobalUserState;
+import com.example.cugcsc.UserCenter.login.Async.LoginAsyncTaskByPassword;
+import com.example.cugcsc.tool.FileoOperations;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -88,6 +95,28 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     LoginAsyncTaskByPassword task=new LoginAsyncTaskByPassword(this);
                     System.out.println(Phone.getText().toString());
                     task.execute(Phone.getText().toString(),Password.getText().toString());
+                }
+                /********单点登录，将登录信息记录到本地*******************/
+                FileoOperations.verifyStoragePermissions(LoginActivity.this);
+                if(!FileoOperations.isFolderExists("/storage/emulated/0/cugcsc")){
+                    FileoOperations.makeDirectory("/storage/emulated/0/cugcsc");//创建文件夹
+                }
+                //判断文件是否存在
+                File file = new File("/storage/emulated/0/cugcsc/user.txt");
+                if(file.exists() && file.isFile())
+                {
+                    file.delete();
+                }else{
+                    try {
+                        RandomAccessFile raf = new RandomAccessFile(file, "rwd");
+                        String user=Phone.getText().toString()+"\n";
+                        String password=Password.getText().toString()+"\n";
+                        raf.write(user.getBytes());
+                        raf.write(password.getBytes());
+                        raf.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
                 break;
             }

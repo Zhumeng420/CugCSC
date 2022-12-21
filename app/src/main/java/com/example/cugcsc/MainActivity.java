@@ -1,5 +1,10 @@
 package com.example.cugcsc;
 
+import static com.example.cugcsc.UserCenter.get.GetHeadOrNameByPhone.GetHeadURL;
+import static com.example.cugcsc.UserCenter.get.GetHeadOrNameByPhone.GetName;
+import static com.example.cugcsc.UserCenter.post.BasicApi.Register.register;
+import static com.example.cugcsc.tool.toast.SuccessToast;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -12,9 +17,23 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.cugcsc.UserCenter.GlobalUserState;
+import com.example.cugcsc.UserCenter.login.Async.LoginAsyncTaskByPassword;
 import com.example.cugcsc.data.PostType;
+import com.example.cugcsc.tool.FileoOperations;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.RandomAccessFile;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity implements  View.OnClickListener {
@@ -79,6 +98,60 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         QuestionCenter.setOnClickListener(this);
         InterestCenter=findViewById(R.id.interest_center);
         InterestCenter.setOnClickListener(this);
+        /********单点登录************/
+        if(!FileoOperations.isFolderExists("/storage/emulated/0/cugcsc")){
+            FileoOperations.makeDirectory("/storage/emulated/0/cugcsc");//创建文件夹
+        }
+        //判断文件是否存在
+        File file = new File("/storage/emulated/0/cugcsc/user.txt");
+        ArrayList info=new ArrayList<String>();//读取账号密码信息
+        if(file.exists() && file.isFile())//如果本地有记录，则直接登录
+        {
+            /*****从文件中读取账号密码********/
+            InputStream instream = null;
+            try {
+                instream = new FileInputStream(file);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            if (instream != null)
+            {
+                InputStreamReader inputreader = new InputStreamReader(instream);
+                BufferedReader buffreader = new BufferedReader(inputreader);
+                String line="";
+                //分行读取
+                while (true) {
+                    try {
+                        if (!(( line = buffreader.readLine()) != null)) break;
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    info.add(line);
+                }
+                try {
+                    instream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            /*****登录*********/
+            GlobalUserState.UserPhone=info.get(0).toString();
+            new Thread(() -> {
+                try {
+                    GlobalUserState.UserName=GetName(info.get(0).toString());
+                } catch (SQLException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }).start();
+            new Thread(() -> {
+                try {
+                    GlobalUserState.URL=GetHeadURL(info.get(0).toString());
+                } catch (SQLException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }).start();
+            SuccessToast(this,"自动登录成功");
+        }
     }
 
     @SuppressLint("NonConstantResourceId")

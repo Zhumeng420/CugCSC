@@ -125,6 +125,7 @@ public class MineActivity extends AppCompatActivity implements View.OnClickListe
                     intent.setClass(MineActivity.this,PostActivity.class);//跳转到发布分区选择界面
                     startActivityForResult(intent,0x003);
                 }
+                break;
             }
             case R.id.user_name:{//修改用户名
                 AlertDialog.Builder builder=new AlertDialog.Builder(this);
