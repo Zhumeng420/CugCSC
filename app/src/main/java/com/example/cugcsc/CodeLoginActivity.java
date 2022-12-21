@@ -30,6 +30,8 @@ public class CodeLoginActivity extends AppCompatActivity implements View.OnClick
     private String Code;
     private EditText UserPhone;
     private EditText UserPassword;
+    private TextView PassLogin;
+    private TextView Register;
     private Button Login;
     private Handler mHandler = new Handler();
     public int T = 300;
@@ -44,6 +46,10 @@ public class CodeLoginActivity extends AppCompatActivity implements View.OnClick
         UserPassword=findViewById(R.id.user_password);
         Login=findViewById(R.id.login);
         Login.setOnClickListener(this);
+        PassLogin=findViewById(R.id.pass_login);
+        PassLogin.setOnClickListener(this);
+        Register=findViewById(R.id.register);
+        Register.setOnClickListener(this);
         /*********设置背景图片透明度*********/
         View v = findViewById(R.id.login_backgorund1);
         v.getBackground().setAlpha(190);//0~255透明度值 ，0为完全透明，255为不透明
@@ -111,6 +117,16 @@ public class CodeLoginActivity extends AppCompatActivity implements View.OnClick
                     startActivity(new Intent(getApplicationContext(),MainActivity.class));
                     overridePendingTransition(0,0);
                 }
+                break;
+            }
+            case R.id.pass_login:{
+               finish();
+               break;
+            }
+            case R.id.register:{
+                startActivity(new Intent(getApplicationContext(),RegisterActivity.class));
+                overridePendingTransition(0,0);
+                break;
             }
         }
     }

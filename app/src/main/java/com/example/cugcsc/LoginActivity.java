@@ -7,9 +7,12 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.example.cugcsc.UserCenter.login.Async.LoginAsyncTaskByPassword;
@@ -21,6 +24,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText Password;
     private TextView Register;
     private TextView CodeLogin;
+    private ImageView SeePass;
+    private Boolean seepass=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +56,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Password.setOnClickListener(this);
         Register.setOnClickListener(this);
         CodeLogin.setOnClickListener(this);
+        Password.setTransformationMethod(PasswordTransformationMethod.getInstance());//设置密码不可见
+        SeePass=findViewById(R.id.see_pass);
+        SeePass.setOnClickListener(this);
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -73,6 +81,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.code_login:{//验证码登录
                 startActivity(new Intent(getApplicationContext(),CodeLoginActivity.class));
                 overridePendingTransition(0,0);
+            }
+            case R.id.register:{//注册
+                startActivity(new Intent(getApplicationContext(),RegisterActivity.class));
+                overridePendingTransition(0,0);
+            }
+            case R.id.see_pass:{
+                if (!seepass){
+                    Password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());//显示密码
+                    SeePass.setImageResource(R.drawable.novisable);
+                    seepass=true;
+                }else{
+                    Password.setTransformationMethod(PasswordTransformationMethod.getInstance());//设置密码不可见
+                    SeePass.setImageResource(R.drawable.seepas);
+                    seepass=false;
+                }
+
             }
         }
     }
