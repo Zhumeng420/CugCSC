@@ -38,6 +38,7 @@ import com.example.cugcsc.UserCenter.GlobalUserState;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -45,6 +46,7 @@ import java.util.Objects;
 
 public class MineActivity extends AppCompatActivity implements View.OnClickListener {
     private RelativeLayout UserInfo;
+    private RelativeLayout LogOut;
     private ImageView UserHead;
     private TextView UserName;
     private TextView UserPhone;
@@ -84,7 +86,7 @@ public class MineActivity extends AppCompatActivity implements View.OnClickListe
         /**********登录/个人信息模块************/
         UserInfo=findViewById(R.id.user_info);
         UserInfo.setOnClickListener(this);//监听点击事件
-        /**********发布模块被点击************/
+        /**********模块被点击************/
         Post=findViewById(R.id.post);
         Post.setOnClickListener(this);
         UserHead=findViewById(R.id.user_head);
@@ -92,6 +94,8 @@ public class MineActivity extends AppCompatActivity implements View.OnClickListe
         UserPhone=findViewById(R.id.user_phone);
         UserName.setOnClickListener(this);
         UserHead.setOnClickListener(this);
+        LogOut=findViewById(R.id.logout);
+        LogOut.setOnClickListener(this);
         /*********设置用户名和头像**********/
         if(GlobalUserState.UserPhone!=""){
             UserName.setText(GlobalUserState.UserName);
@@ -166,6 +170,35 @@ public class MineActivity extends AppCompatActivity implements View.OnClickListe
                 intent.setType("image/*");
                 this.startActivityForResult(intent, 0x005);
                 break;
+            }
+            case R.id.logout:{
+                AlertDialog.Builder builder=new AlertDialog.Builder(this);
+                builder.setTitle("确定要退出登录？");
+                builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        File file = new File("/storage/emulated/0/cugcsc/user.txt");
+                        if(file.exists() && file.isFile())//删除本地记录
+                        {
+                            file.delete();
+                        }
+                        UserName.setText("未登录");
+                        UserPhone.setText("");
+                        UserHead.setImageResource(R.drawable.home);
+                        GlobalUserState.UserPhone="";
+                        GlobalUserState.UserName="";
+                        GlobalUserState.URL="";
+                        SuccessToast(MineActivity.this,"退出登录成功");
+                    }
+                });
+                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        WarnToast(MineActivity.this,"取消");
+                    }
+                });
+                AlertDialog dialog=builder.create();
+                dialog.show();
             }
         }
     }
