@@ -4,19 +4,38 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class EmotionDetailActivity extends AppCompatActivity {
-
+    private TextView title;
+    private ImageView head;
+    private TextView name;
+    private  byte[] buff;
+    private int id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emotion_detail);
+        /**********绑定控件*************************/
+        title=findViewById(R.id.title);
+        head=findViewById(R.id.user_head);
+        name=findViewById(R.id.user_name);
+        /**********接受从列表传输过来的数据************/
+        Intent i=getIntent();
+        title.setText(i.getStringExtra("title"));
+        name.setText(i.getStringExtra("name"));
+        buff=i.getByteArrayExtra("head");
+        head.setImageBitmap(BitmapFactory.decodeByteArray(buff,0, buff.length));
+        final String dataStr=i.getStringExtra("diarys");
+        initWebView(dataStr);
     }
 
     /**

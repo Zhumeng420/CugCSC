@@ -23,19 +23,55 @@
             android:src="@drawable/back" />
 
         <TextView
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="14dp"
-            android:text="列表"
+            android:layout_marginTop="10dp"
+            android:text="TextView"
             android:textColor="#353535"
-            android:textSize="16sp" />
+            android:textSize="20sp" />
     </LinearLayout>
-
-    <WebView
-        android:id="@+id/content"
+    <LinearLayout
         android:layout_marginTop="50dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/head_card"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="10dp">
+            <ImageView
+                android:id="@+id/user_head"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                tools:srcCompat="@tools:sample/avatars" />
+        </androidx.cardview.widget.CardView>
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="308dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:text="TextView"
+            android:textSize="16dp" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <WebView
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp" />
+    </ScrollView>
 
 </RelativeLayout>

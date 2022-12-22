@@ -1,6 +1,7 @@
 package com.example.cugcsc;
 
 import static com.example.cugcsc.UserCenter.get.GetEmotion.getEmotion;
+import static com.example.cugcsc.UserCenter.post.BasicApi.AddNums.addVisitNums;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -126,12 +127,21 @@ public class EmotionShowActivity extends AppCompatActivity {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //点击条目进行跳转
-                    /*Intent intent = new Intent(context, HtmlForBlogDetail.class);
-                    /*************以下增加该帖子的访问量**************/
-                    /*new Thread(() -> {
+                    /********增加访问量***************/
+                    String table="";//首先要确定是哪个表
+                    if(PostType.type==1){
+                        table="school";
+                    }else if(PostType.type==2){
+                        table="emotion";
+                    }else if(PostType.type==3){
+                        table="interets";
+                    }else if(PostType.type==4){
+                        table="study";
+                    }
+                    String finalTable = table;
+                    new Thread(() -> {
                         try {
-                            addVisitNums(news.id);
+                            addVisitNums(news.id, finalTable);
                         } catch (SQLException e) {
                             e.printStackTrace();
                         } catch (ClassNotFoundException e) {
@@ -139,14 +149,14 @@ public class EmotionShowActivity extends AppCompatActivity {
                         }
                         handler.sendEmptyMessage(1);//通知主线程更新控件
                     }).start();
+                    //点击条目进行跳转
+                    Intent intent = new Intent(context, EmotionDetailActivity.class);
                     /***********以下为activity之间的数据传输**********/
-                   /* intent.putExtra("id",data.get(position).id);
+                    intent.putExtra("id",data.get(position).id);
                     intent.putExtra("title",data.get(position).title);
                     intent.putExtra("name",data.get(position).name);
                     intent.putExtra("diarys",data.get(position).content);
                     intent.putExtra("head",Bitmap2Bytes(data.get(position).head));
-                    intent.putExtra("like_nums",data.get(position).like_nums);
-                    intent.putExtra("collect_nums",data.get(position).collect_nums);
                     context.startActivity(intent);
                     //Toast.makeText(context, "click" + position, Toast.LENGTH_SHORT).show();*/
                 }
