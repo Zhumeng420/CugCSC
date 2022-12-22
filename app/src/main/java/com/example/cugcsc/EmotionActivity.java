@@ -39,6 +39,7 @@ import android.widget.Toast;
 import com.example.cugcsc.UserCenter.GlobalUserState;
 import com.example.cugcsc.UserCenter.post.Async.PostEmotionByAsync;
 import com.example.cugcsc.data.PostType;
+import com.example.cugcsc.tool.ViewUtil;
 import com.example.cugcsc.view.ColorPickerView;
 import com.example.cugcsc.view.RichEditor;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -438,6 +439,8 @@ public class EmotionActivity extends AppCompatActivity implements  View.OnClickL
             }else{
                 behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
             }
+            /**************如果输入法打开了要关闭输入法****************/
+            ViewUtil.hideOneInputMethod(this,mEditor);
         } else if (id == R.id.button_list_ol) {
             if (isListOl) {
                 mListOL.setImageResource(R.mipmap.list_ol);

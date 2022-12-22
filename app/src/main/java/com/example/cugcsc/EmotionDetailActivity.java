@@ -57,7 +57,7 @@ public class EmotionDetailActivity extends AppCompatActivity {
         mWebView.addJavascriptInterface(new AndroidJavaScript(getApplication()), "android");//设置js接口
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);//支持内容重新布局
         /******  22222222  ***********************************************************************/
-        data = "</Div><head><style>img{ width:100% !important;}</style></head>" + data;//给图片设置一个样式，宽满屏
+        data = "</Div><head><style>img{width:100% height:100% !important; }</style></head>" + data;//给图片设置一个样式，宽满屏
         /******  2222222222  ***********************************************************************/
         mWebView.loadDataWithBaseURL(null, data, "text/html", "utf-8", null);
     }
