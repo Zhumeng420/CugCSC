@@ -552,7 +552,7 @@ public class EmotionActivity extends AppCompatActivity implements  View.OnClickL
                                 }
                                 PostEmotionByAsync task=new PostEmotionByAsync(EmotionActivity.this,table,title_text,content, GlobalUserState.UserPhone);
                                 task.execute(0);
-                                SuccessToast(EmotionActivity.this, "发布成功");
+                                //SuccessToast(EmotionActivity.this, "发布成功");
                             }
                         });
                 alert.show();//显示对话框

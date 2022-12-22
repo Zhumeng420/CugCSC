@@ -85,7 +85,7 @@ public class RegisterActivity extends AppCompatActivity  implements View.OnClick
                 String phone=UserPhone.getText().toString();
                 if(!Objects.equals(Phone, phone)){
                     ErrorToast(this,"两次手机号码不一致");
-                }else if(Code!=CodeInput.getText().toString()){
+                }else if(!Objects.equals(Code, CodeInput.getText().toString())){
                     ErrorToast(this,"验证码错误");
                 }else if(Password1.getText().toString().length()<8){
                     ErrorToast(this,"密码不得小于八位");

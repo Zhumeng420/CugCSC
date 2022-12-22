@@ -19,11 +19,12 @@ public class Register {
     public static boolean register(String phone,String password) throws SQLException, ClassNotFoundException {
         Connection conn = getConnection();
         Statement stmt = conn.createStatement();
-        String sql = "insert into user(phone,password,head) value(?,?)";
+        String sql = "insert into user(phone,password,head,name) value(?,?,?,?)";
         PreparedStatement pstmt=conn.prepareStatement(sql);
         pstmt.setString(1,phone);
         pstmt.setString(2,password);
         pstmt.setString(3,"https://p1.ssl.qhimg.com/dr/270_500_/t013db695a8693421f3.jpg?size=311x304");
+        pstmt.setString(4,phone);
         int res=pstmt.executeUpdate();
         pstmt.close();
         conn.close();

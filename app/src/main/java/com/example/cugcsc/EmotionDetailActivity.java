@@ -1,25 +1,63 @@
 package com.example.cugcsc;
 
-import androidx.appcompat.app.AppCompatActivity;
+import static com.example.cugcsc.UserCenter.get.GetComment.getcomment;
+import static com.example.cugcsc.UserCenter.get.GetLostAndFound.GetLostFound;
+import static com.example.cugcsc.UserCenter.post.BasicApi.AddNums.addVisitNums;
+import static com.example.cugcsc.tool.toast.ErrorToast;
+import static com.example.cugcsc.tool.toast.SuccessToast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class EmotionDetailActivity extends AppCompatActivity {
+import com.example.cugcsc.UserCenter.GlobalUserState;
+import com.example.cugcsc.data.Comment;
+import com.example.cugcsc.data.EmoData;
+import com.example.cugcsc.data.LostAndFoundData;
+import com.example.cugcsc.data.PostType;
+import com.google.android.material.button.MaterialButtonToggleGroup;
+
+import java.io.ByteArrayOutputStream;
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+public class EmotionDetailActivity extends AppCompatActivity  implements View.OnClickListener{
     private TextView title;
     private ImageView head;
     private TextView name;
     private  byte[] buff;
     private int id;
+    private EditText comment;
+    private Button post;
+    private List<Comment> mlist=new ArrayList<>();
+    private RecyclerView mRecyclerView;
+    private MyAdapter mMyAdapter ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,15 +66,133 @@ public class EmotionDetailActivity extends AppCompatActivity {
         title=findViewById(R.id.title);
         head=findViewById(R.id.user_head);
         name=findViewById(R.id.user_name);
+        comment=findViewById(R.id.comment_context);
+        post=findViewById(R.id.post_comment);
         /**********接受从列表传输过来的数据************/
         Intent i=getIntent();
         title.setText(i.getStringExtra("title"));
         name.setText(i.getStringExtra("name"));
         buff=i.getByteArrayExtra("head");
         head.setImageBitmap(BitmapFactory.decodeByteArray(buff,0, buff.length));
+        id=i.getIntExtra("id",id);
         final String dataStr=i.getStringExtra("diarys");
+        /********初始化webview********/
         initWebView(dataStr);
+        /*********设置横向列表**********/
+        mRecyclerView = findViewById(R.id.comment_list);
+        //设置垂直布局
+        LinearLayoutManager layoutManager=new LinearLayoutManager(this);
+        layoutManager.setOrientation(RecyclerView.VERTICAL);
+        mRecyclerView.setLayoutManager(layoutManager);
+        //分割线
+        DividerItemDecoration mDivider = new
+                DividerItemDecoration(this,DividerItemDecoration.VERTICAL);
+        mRecyclerView.addItemDecoration(mDivider);
+        //mRecyclerView.setHasFixedSize(true);//防止同时滑动
+        //mRecyclerView.setNestedScrollingEnabled(false);
+        /***************获取评论列表*******************/
+        String table="";
+        if(PostType.type==1){
+            table="school";
+        }else if(PostType.type==2){
+            table="emotion";
+        }else if(PostType.type==3){
+            table="interets";
+        }else if(PostType.type==4){
+            table="study";
+        }
+        String finalTable = table;
+        new Thread(() -> {
+            try {
+                System.out.println(finalTable);
+                System.out.println(id);
+                getcomment(mlist, finalTable,String.valueOf(id));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            handler.sendEmptyMessage(1);//通知主线程更新控件
+        }).start();
     }
+
+    class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHoder> {
+        private Context context;
+        private List<Comment> data;
+
+        public MyAdapter(Context context,List<Comment> data){
+            this.context=context;
+            this.data=data;
+        }
+
+        @NonNull
+        @Override
+        public MyAdapter.MyViewHoder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view = View.inflate(EmotionDetailActivity.this, R.layout.comment_item, null);
+            MyAdapter.MyViewHoder myViewHoder = new MyAdapter.MyViewHoder(view);
+            return myViewHoder;
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull MyAdapter.MyViewHoder holder, @SuppressLint("RecyclerView") int position) {
+            Comment news =mlist.get(position);
+            holder.name.setText(news.name);
+            holder.head.setImageBitmap(news.head);
+            @SuppressLint("SimpleDateFormat") DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            holder.date.setText(format.format(news.date));
+            holder.content.setText(news.content);
+            //单击事件
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {//条目点击时间
+                    //Toast.makeText(context, "click" + position, Toast.LENGTH_SHORT).show();*/
+                }
+            });
+        }
+        private byte[] Bitmap2Bytes(Bitmap bm){
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
+            return baos.toByteArray();
+        }
+        class MyViewHoder extends RecyclerView.ViewHolder {
+            TextView name;
+            ImageView head;
+            TextView content;
+            TextView date;
+            public MyViewHoder(@NonNull View itemView) {
+                super(itemView);
+                name = itemView.findViewById(R.id.name);
+                head=itemView.findViewById(R.id.head);
+                date=itemView.findViewById(R.id.post_time);
+                content=itemView.findViewById(R.id.content);
+            }
+        }
+        @Override
+        public int getItemCount() {
+            System.out.println(mlist.size());
+            return mlist.size();
+        }
+
+    }
+    //handler为线程之间通信的桥梁
+    @SuppressLint("HandlerLeak")
+    private Handler handler = new Handler(){
+
+        @SuppressLint("HandlerLeak")
+        public void handleMessage(Message msg) {
+            switch(msg.what){
+                case 1:  //根据上面的提示，当Message为1，表示数据处理完了，可以通知主线程了
+                    mMyAdapter = new MyAdapter(EmotionDetailActivity.this,EmotionDetailActivity.this.mlist);
+                    mRecyclerView.setAdapter(mMyAdapter);
+                    LinearLayoutManager layoutManager = new LinearLayoutManager(EmotionDetailActivity.this);
+                    mRecyclerView.setLayoutManager(layoutManager);        //修改UI界面控件属性
+                    break;
+                default :
+                    break;
+            }
+        }
+
+    };
 
     /**
      * 初始化博客显示器
@@ -60,6 +216,20 @@ public class EmotionDetailActivity extends AppCompatActivity {
         data = "</Div><head><style>img{width:100% height:100% !important; }</style></head>" + data;//给图片设置一个样式，宽满屏
         /******  2222222222  ***********************************************************************/
         mWebView.loadDataWithBaseURL(null, data, "text/html", "utf-8", null);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.post_comment:{
+                if(Objects.equals(GlobalUserState.UserPhone, "")){
+                    ErrorToast(this,"您尚未登录，请登录");
+                }else{
+                    comment.setText("");//清空评论栏
+                    SuccessToast(this,"评论成功");
+                }
+            }
+        }
     }
 
     /**

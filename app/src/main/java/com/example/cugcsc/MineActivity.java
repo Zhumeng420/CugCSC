@@ -4,6 +4,7 @@ import static com.example.cugcsc.UserCenter.get.GetLostAndFound.GetLostFound;
 import static com.example.cugcsc.UserCenter.post.BasicApi.Register.changeHead;
 import static com.example.cugcsc.UserCenter.post.BasicApi.Register.changeUsername;
 import static com.example.cugcsc.tool.HttpUtils.UploadImage;
+import static com.example.cugcsc.tool.toast.ErrorToast;
 import static com.example.cugcsc.tool.toast.SuccessToast;
 import static com.example.cugcsc.tool.toast.WarnToast;
 
@@ -125,8 +126,8 @@ public class MineActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             }
             case R.id.post:{//发布被点击
-                if (GlobalUserState.UserPhone == "") {//如果用户没有登录
-
+                if (Objects.equals(GlobalUserState.UserPhone, "")) {//如果用户没有登录
+                    ErrorToast(this,"您尚未登录，请登录");
                 }else{
                     Intent intent=new Intent();
                     intent.setClass(MineActivity.this,PostActivity.class);//跳转到发布分区选择界面
@@ -135,74 +136,80 @@ public class MineActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             }
             case R.id.user_name:{//修改用户名
-                AlertDialog.Builder builder=new AlertDialog.Builder(this);
-                final EditText edit = new EditText(this);
-                builder.setView(edit);
-                builder.setTitle("请输入新名称");
-                builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String newname=edit.getText().toString();
-                        GlobalUserState.UserName=newname;
-                        //Toast.makeText(mine.this, "开始后台上传，请勿退出APP", Toast.LENGTH_SHORT).show();
-                        new Thread(() -> {//更新数据库
-                            try {
-                                changeUsername(GlobalUserState.UserPhone,newname);
-                            } catch (SQLException e) {
-                                e.printStackTrace();
-                            } catch (ClassNotFoundException e) {
-                                e.printStackTrace();
-                            }
-                            handler.sendEmptyMessage(1);//通知主线程更新控件
-                        }).start();
-                    }
-                });
-                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        WarnToast(MineActivity.this,"取消修改");
-                    }
-                });
-                AlertDialog dialog=builder.create();
-                dialog.show();
-                break;
+                if(GlobalUserState.UserPhone!=""){
+                    AlertDialog.Builder builder=new AlertDialog.Builder(this);
+                    final EditText edit = new EditText(this);
+                    builder.setView(edit);
+                    builder.setTitle("请输入新名称");
+                    builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            String newname=edit.getText().toString();
+                            GlobalUserState.UserName=newname;
+                            //Toast.makeText(mine.this, "开始后台上传，请勿退出APP", Toast.LENGTH_SHORT).show();
+                            new Thread(() -> {//更新数据库
+                                try {
+                                    changeUsername(GlobalUserState.UserPhone,newname);
+                                } catch (SQLException e) {
+                                    e.printStackTrace();
+                                } catch (ClassNotFoundException e) {
+                                    e.printStackTrace();
+                                }
+                                handler.sendEmptyMessage(1);//通知主线程更新控件
+                            }).start();
+                        }
+                    });
+                    builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            WarnToast(MineActivity.this,"取消修改");
+                        }
+                    });
+                    AlertDialog dialog=builder.create();
+                    dialog.show();
+                    break;
+                }
             }
             case R.id.user_head:{//更换头像
-                /******打开图片选择器**********/
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/*");
-                this.startActivityForResult(intent, 0x005);
-                break;
+                if(GlobalUserState.UserPhone!=""){
+                    /******打开图片选择器**********/
+                    Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                    intent.setType("image/*");
+                    this.startActivityForResult(intent, 0x005);
+                    break;
+                }
             }
             case R.id.logout:{
-                AlertDialog.Builder builder=new AlertDialog.Builder(this);
-                builder.setTitle("确定要退出登录？");
-                builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        File file = new File("/storage/emulated/0/cugcsc/user.txt");
-                        if(file.exists() && file.isFile())//删除本地记录
-                        {
-                            file.delete();
+                if(GlobalUserState.UserPhone!=""){
+                    AlertDialog.Builder builder=new AlertDialog.Builder(this);
+                    builder.setTitle("确定要退出登录？");
+                    builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            File file = new File("/storage/emulated/0/cugcsc/user.txt");
+                            if(file.exists() && file.isFile())//删除本地记录
+                            {
+                                file.delete();
+                            }
+                            UserName.setText("未登录");
+                            UserPhone.setText("");
+                            UserHead.setImageResource(R.drawable.user);
+                            GlobalUserState.UserPhone="";
+                            GlobalUserState.UserName="";
+                            GlobalUserState.URL="";
+                            SuccessToast(MineActivity.this,"退出登录成功");
                         }
-                        UserName.setText("未登录");
-                        UserPhone.setText("");
-                        UserHead.setImageResource(R.drawable.user);
-                        GlobalUserState.UserPhone="";
-                        GlobalUserState.UserName="";
-                        GlobalUserState.URL="";
-                        SuccessToast(MineActivity.this,"退出登录成功");
-                    }
-                });
-                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        WarnToast(MineActivity.this,"取消");
-                    }
-                });
-                AlertDialog dialog=builder.create();
-                dialog.show();
-                break;
+                    });
+                    builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            WarnToast(MineActivity.this,"取消");
+                        }
+                    });
+                    AlertDialog dialog=builder.create();
+                    dialog.show();
+                    break;
+                }
             }
             case R.id.convention:{
                 startActivity(new Intent(getApplicationContext(),CoventionActivity.class));

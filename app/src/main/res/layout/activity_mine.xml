@@ -101,12 +101,13 @@
 
     <RelativeLayout
         android:id="@+id/re_aboutwe"
-        android:layout_marginTop="185dp"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:layout_marginTop="185dp"
         android:background="#FFFFFF"
         android:clickable="true"
         android:paddingLeft="12dp">
+
         <ImageView
             android:id="@+id/iv_shoucang"
             android:layout_width="24dp"
@@ -114,7 +115,8 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="12dp"
-            android:src="@drawable/blog3"/>
+            android:src="@drawable/blog3" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -124,6 +126,7 @@
             android:text="@string/blog_manage"
             android:textColor="#353535"
             android:textSize="16sp" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"

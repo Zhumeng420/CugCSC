@@ -62,29 +62,73 @@
             android:text="TextView"
             android:textSize="16dp" />
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="100dp">
+
+    </LinearLayout>
 
     <ScrollView
+        android:id="@+id/scrool"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="100dp">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             tools:ignore="WebViewLayout">
-
-            <WebView
-                android:id="@+id/content"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/comment_list"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#FBFBFB" />
+                >
+                <WebView
+                    android:id="@+id/content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_below="@+id/content"
+                    android:id="@+id/comment_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:layout_marginBottom="50dp"
+                   />
+            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignBottom="@+id/scrool"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/color_top"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp">
+
+        <EditText
+            android:id="@+id/comment_context"
+            android:layout_width="280dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/edittext_shape01"></EditText>
+
+        <android.widget.Button
+            android:id="@+id/post_comment"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:layout_alignEnd="@id/code"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/color_button3"
+            android:text="评  论"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+    </LinearLayout>
 </RelativeLayout>

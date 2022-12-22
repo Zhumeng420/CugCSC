@@ -5,8 +5,8 @@ import static com.example.cugcsc.UserCenter.get.GetHeadOrNameByPhone.GetName;
 import static com.example.cugcsc.database.DbConnector.getConnection;
 import static com.example.cugcsc.tool.GetImageByURL.getURLimage;
 
+import com.example.cugcsc.data.Comment;
 import com.example.cugcsc.data.EmoData;
-import com.example.cugcsc.data.LostAndFoundData;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -14,22 +14,20 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-public class GetEmotion {
-    public static Boolean  getEmotion(List<EmoData> result,String table) throws SQLException, ClassNotFoundException {
+public class GetComment {
+    public static Boolean  getcomment(List<Comment> result, String table,String id) throws SQLException, ClassNotFoundException {
         Connection conn = getConnection();
         Statement stmt = conn.createStatement();
-        String sql = "select * from "+table;
+        String sql = "select * from comment where which_table='"+table+"' and source_id="+id;
         ResultSet rs = stmt.executeQuery(sql);
         //rs.beforeFirst();
         while(rs.next()){
-            EmoData temp=new EmoData();
-            temp.title = rs.getString("title");
-            temp.content= rs.getString("content");
-            temp.post_time=rs.getDate("post_time");
-            temp.visit_nums=rs.getInt("visit_nums");
+            Comment temp=new Comment();
             temp.name=GetName(rs.getString("phone"));
             temp.head=getURLimage(GetHeadURL(rs.getString("phone")));
-            temp.id=rs.getInt("id");
+            temp.date=rs.getDate("time");
+            temp.content=rs.getString("context");
+            temp.level=rs.getInt("which_level");
             result.add(temp);
         }
         rs.close();

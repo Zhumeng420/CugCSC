@@ -2,9 +2,9 @@
     <!-- Base application theme. -->
     <style name="Theme.CugCSC" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#80D8D4D4</item>
-        <item name="colorPrimaryVariant">#80C3BEBE</item>
-        <item name="colorOnPrimary">#80C3BEBE</item>
+        <item name="colorPrimary">#8034D334</item>
+        <item name="colorPrimaryVariant">#449ADF</item>
+        <item name="colorOnPrimary">#0CDC14</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>

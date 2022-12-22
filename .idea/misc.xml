@@ -23,7 +23,7 @@
         <entry key="..\:/CugCSC2/app/src/main/res/layout/activity_code_login.xml" value="0.5390625" />
         <entry key="..\:/CugCSC2/app/src/main/res/layout/activity_covention.xml" value="0.5390625" />
         <entry key="..\:/CugCSC2/app/src/main/res/layout/activity_emotion.xml" value="0.49304029304029307" />
-        <entry key="..\:/CugCSC2/app/src/main/res/layout/activity_emotion_detail.xml" value="0.5536458333333333" />
+        <entry key="..\:/CugCSC2/app/src/main/res/layout/activity_emotion_detail.xml" value="0.33" />
         <entry key="..\:/CugCSC2/app/src/main/res/layout/activity_emotion_show.xml" value="0.5536458333333333" />
         <entry key="..\:/CugCSC2/app/src/main/res/layout/activity_library.xml" value="0.40729166666666666" />
         <entry key="..\:/CugCSC2/app/src/main/res/layout/activity_login.xml" value="0.5390625" />
@@ -41,6 +41,7 @@
         <entry key="..\:/CugCSC2/app/src/main/res/layout/activity_register.xml" value="0.5390625" />
         <entry key="..\:/CugCSC2/app/src/main/res/layout/activity_show_diarys.xml" value="0.5536458333333333" />
         <entry key="..\:/CugCSC2/app/src/main/res/layout/bottom_sheet.xml" value="0.5526041666666667" />
+        <entry key="..\:/CugCSC2/app/src/main/res/layout/comment_item.xml" value="0.5526041666666667" />
         <entry key="..\:/CugCSC2/app/src/main/res/layout/content_lost_found_detail.xml" value="0.5536458333333333" />
         <entry key="..\:/CugCSC2/app/src/main/res/layout/emo_item.xml" value="0.5526041666666667" />
         <entry key="..\:/CugCSC2/app/src/main/res/layout/include_bottom_sheet_layout.xml" value="0.5526041666666667" />
