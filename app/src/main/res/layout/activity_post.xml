@@ -7,14 +7,16 @@
     tools:context=".PostActivity"
     android:background="#66DAD6D6"
     >
+
     <LinearLayout
         android:id="@+id/back_mine"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="@drawable/color_top"
         android:orientation="horizontal"
         tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp"
-        android:background="@drawable/color_top">
+        tools:layout_editor_absoluteY="1dp">
+
         <ImageView
             android:id="@+id/back"
             android:layout_width="24dp"
@@ -22,6 +24,7 @@
             android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
             android:src="@drawable/back" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

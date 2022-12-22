@@ -21,7 +21,9 @@
         <entry key="..\:/CugCSC2/app/src/main/res/drawable/selector.xml" value="0.1" />
         <entry key="..\:/CugCSC2/app/src/main/res/drawable/shape_thumb.xml" value="0.359" />
         <entry key="..\:/CugCSC2/app/src/main/res/layout/activity_code_login.xml" value="0.5390625" />
+        <entry key="..\:/CugCSC2/app/src/main/res/layout/activity_covention.xml" value="0.5390625" />
         <entry key="..\:/CugCSC2/app/src/main/res/layout/activity_emotion.xml" value="0.49304029304029307" />
+        <entry key="..\:/CugCSC2/app/src/main/res/layout/activity_emotion_detail.xml" value="0.5536458333333333" />
         <entry key="..\:/CugCSC2/app/src/main/res/layout/activity_emotion_show.xml" value="0.5536458333333333" />
         <entry key="..\:/CugCSC2/app/src/main/res/layout/activity_library.xml" value="0.40729166666666666" />
         <entry key="..\:/CugCSC2/app/src/main/res/layout/activity_login.xml" value="0.5390625" />

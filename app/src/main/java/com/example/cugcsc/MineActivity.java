@@ -47,6 +47,7 @@ import java.util.Objects;
 public class MineActivity extends AppCompatActivity implements View.OnClickListener {
     private RelativeLayout UserInfo;
     private RelativeLayout LogOut;
+    private RelativeLayout Convention;
     private ImageView UserHead;
     private TextView UserName;
     private TextView UserPhone;
@@ -96,6 +97,8 @@ public class MineActivity extends AppCompatActivity implements View.OnClickListe
         UserHead.setOnClickListener(this);
         LogOut=findViewById(R.id.logout);
         LogOut.setOnClickListener(this);
+        Convention=findViewById(R.id.convention);
+        Convention.setOnClickListener(this);
         /*********设置用户名和头像**********/
         if(GlobalUserState.UserPhone!=""){
             UserName.setText(GlobalUserState.UserName);
@@ -184,7 +187,7 @@ public class MineActivity extends AppCompatActivity implements View.OnClickListe
                         }
                         UserName.setText("未登录");
                         UserPhone.setText("");
-                        UserHead.setImageResource(R.drawable.home);
+                        UserHead.setImageResource(R.drawable.user);
                         GlobalUserState.UserPhone="";
                         GlobalUserState.UserName="";
                         GlobalUserState.URL="";
@@ -199,6 +202,11 @@ public class MineActivity extends AppCompatActivity implements View.OnClickListe
                 });
                 AlertDialog dialog=builder.create();
                 dialog.show();
+                break;
+            }
+            case R.id.convention:{
+                startActivity(new Intent(getApplicationContext(),CoventionActivity.class));
+                overridePendingTransition(0,0);
             }
         }
     }
