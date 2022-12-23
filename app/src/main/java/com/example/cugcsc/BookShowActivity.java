@@ -14,6 +14,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -89,16 +90,18 @@ public class BookShowActivity extends AppCompatActivity {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //点击条目进行跳转
-                    Intent intent = new Intent(context, EmotionDetailActivity.class);
-                    /***********以下为activity之间的数据传输**********/
-                    /*intent.putExtra("id",data.get(position).id);
-                    intent.putExtra("title",data.get(position).title);
-                    intent.putExtra("name",data.get(position).name);
-                    intent.putExtra("diarys",data.get(position).content);
-                    intent.putExtra("head",Bitmap2Bytes(data.get(position).head));
-                    context.startActivity(intent);*/
-                    //Toast.makeText(context, "click" + position, Toast.LENGTH_SHORT).show();*/
+                    /***********打开浏览器开始下载**********/
+                    //根据url下载文件
+                    Uri uri = Uri.parse(news.url);
+                    try {
+                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                        //指定谷歌浏览器
+                        intent.setClassName("com.android.chrome","com.google.android.apps.chrome.Main");
+                        startActivity(intent);
+                    }catch (Exception e){
+                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                        startActivity(intent);
+                    }
                 }
             });
         }
