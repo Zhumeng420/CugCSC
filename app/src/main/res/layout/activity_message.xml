@@ -102,7 +102,35 @@
             android:text="   AI绘图"
             android:textColor="#353535"
             android:textSize="14sp" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cug"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="175dp"
+            android:layout_marginTop="35dp"
+            android:paddingBottom="15dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp">
+
+            <ImageView
+                android:id="@+id/book_center4"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginLeft="0dp"
+                android:src="@drawable/cug" />
+        </androidx.cardview.widget.CardView>
+        <TextView
+            android:id="@+id/study_name3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="170dp"
+            android:layout_marginTop="80dp"
+            android:text="  教务处"
+            android:textColor="#353535"
+            android:textSize="14sp" />
     </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/content_view3"
         android:layout_width="400dp"

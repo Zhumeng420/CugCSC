@@ -25,6 +25,7 @@ public class MessageActivity extends AppCompatActivity implements  View.OnClickL
     private CardView Weather;
     private CardView Shudo;
     private CardView Paint;
+    private CardView CUG;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +46,8 @@ public class MessageActivity extends AppCompatActivity implements  View.OnClickL
         Shudo.setOnClickListener(this);
         Paint=findViewById(R.id.paint);
         Paint.setOnClickListener(this);
+        CUG=findViewById(R.id.cug);
+        CUG.setOnClickListener(this);
         /********设置透明********/
         View v = findViewById(R.id.serach_view2);
         v.getBackground().setAlpha(200);//0~255透明度值 ，0为完全透明，255为不透明
@@ -84,13 +87,13 @@ public class MessageActivity extends AppCompatActivity implements  View.OnClickL
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.weather:{
-                Intent intent=new Intent(MessageActivity.this,WebShowActivity.class);
+                Intent intent=new Intent(MessageActivity.this,MoviePlayActivity.class);
                 intent.putExtra("url","https://www.qweather.com/");
                 MessageActivity.this.startActivity(intent);
                 break;
             }
             case R.id.shudu:{
-                Intent intent=new Intent(MessageActivity.this,WebShowActivity.class);
+                Intent intent=new Intent(MessageActivity.this,MoviePlayActivity.class);//百度的比较特殊，设置了web代理打不开
                 intent.putExtra("url","https://sudoku-cn.com/");
                 MessageActivity.this.startActivity(intent);
                 break;
@@ -98,6 +101,12 @@ public class MessageActivity extends AppCompatActivity implements  View.OnClickL
             case R.id.paint:{
                 Intent intent=new Intent(MessageActivity.this,WebShowActivity.class);
                 intent.putExtra("url","http://yige.baidu.com/");
+                MessageActivity.this.startActivity(intent);
+                break;
+            }
+            case R.id.cug:{
+                Intent intent=new Intent(MessageActivity.this,MoviePlayActivity.class);
+                intent.putExtra("url","https://jwc.cug.edu.cn/");
                 MessageActivity.this.startActivity(intent);
                 break;
             }

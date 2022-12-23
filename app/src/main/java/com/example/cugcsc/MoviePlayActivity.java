@@ -32,7 +32,7 @@ public class MoviePlayActivity extends AppCompatActivity {
         /******浏览器中允许返回*************/
         WebSettings webSettings=MovieShow.getSettings();
         webSettings.setJavaScriptEnabled(true);
-
+        webSettings.setBuiltInZoomControls(true);
     }
     /*******全屏设置***********/
     private class MyWebChromeClient extends WebChromeClient {
