@@ -22,6 +22,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.JavascriptInterface;
@@ -148,8 +149,8 @@ public class EmotionDetailActivity extends AppCompatActivity  implements View.On
             holder.head.setImageBitmap(news.head);
             @SuppressLint("SimpleDateFormat") DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
             holder.date.setText(format.format(news.date));
-            holder.content.setText(news.content);
-            holder.level.setText("楼层："+String.valueOf(news.level));
+            holder.content.setText(unicode2String(news.content));
+            holder.level.setText("楼层："+ news.level);
             //单击事件
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -242,16 +243,6 @@ public class EmotionDetailActivity extends AppCompatActivity  implements View.On
                 if(Objects.equals(GlobalUserState.UserPhone, "")){
                     ErrorToast(this,"您尚未登录，请登录");
                 }else{
-                    /*********修改ui控件*********************/
-                    Comment temp=new Comment();
-                    temp.level=mlist.size()+1;
-                    temp.date=new Timestamp(new Date().getTime());
-                    temp.content=comment.getText().toString();
-                    temp.head=GlobalUserState.Head;
-                    temp.name=GlobalUserState.UserName;
-                    mMyAdapter.addData(mlist.size(),temp);//发布评论
-                    comment.setText("");//清空评论栏
-                    SuccessToast(this,"评论成功");
                     /*********向数据库插入数据**************/
                     String table="";
                     if(PostType.type==1){
@@ -266,18 +257,64 @@ public class EmotionDetailActivity extends AppCompatActivity  implements View.On
                     String finalTable = table;
                     new Thread(() -> {
                         try {
-                            postComment(finalTable,comment.getText().toString(),GlobalUserState.UserPhone,mlist.size(),id);
+                            postComment(finalTable,string2Unicode(comment.getText().toString()),GlobalUserState.UserPhone,mlist.size(),id);
                         } catch (SQLException | ClassNotFoundException e) {
                             e.printStackTrace();
                         }
                         handler.sendEmptyMessage(1);//通知主线程更新控件
                     }).start();
-
+                    /*********修改ui控件*********************/
+                    Comment temp=new Comment();
+                    temp.level=mlist.size()+1;
+                    temp.date=new Timestamp(new Date().getTime());
+                    temp.content=string2Unicode(comment.getText().toString());
+                    temp.head=GlobalUserState.Head;
+                    temp.name=GlobalUserState.UserName;
+                    mMyAdapter.addData(mlist.size(),temp);//发布评论
+                    comment.setText("");//清空评论栏
+                    SuccessToast(this,"评论成功");
                 }
             }
         }
     }
 
+    public static String unicode2String(String unicode) {
+        Log.e("str==", "111111111" + "\\\\u");
+        StringBuffer string = new StringBuffer();
+
+        String[] hex = unicode.split("\\\\u");
+
+        for (int i = 1; i < hex.length; i++) {
+            Log.e("str==", "22222222" + "\\\\u");
+            // 转换出每一个代码点
+            int data = Integer.parseInt(hex[i], 16);
+
+            // 追加成string
+            string.append((char) data);
+        }
+
+        return string.toString();
+    }
+
+    public static String string2Unicode(String string) {
+
+        StringBuffer unicode = new StringBuffer();
+
+        for (int i = 0; i < string.length(); i++) {
+
+            // 取出每一个字符
+            char c = string.charAt(i);
+            if (c < 256)//ASC11表中的字符码值不够4位,补00
+            {
+                unicode.append("\\u00");
+            } else {
+                unicode.append("\\u");
+            }
+            // 转换为unicode
+            unicode.append(Integer.toHexString(c));
+        }
+        return unicode.toString();
+    }
     /**
      * AndroidJavaScript
      * 本地与h5页面交互的js类，这里写成内部类了
