@@ -6,7 +6,6 @@ import static com.example.cugcsc.database.DbConnector.getConnection;
 import static com.example.cugcsc.tool.GetImageByURL.getURLimage;
 
 import com.example.cugcsc.data.Comment;
-import com.example.cugcsc.data.EmoData;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

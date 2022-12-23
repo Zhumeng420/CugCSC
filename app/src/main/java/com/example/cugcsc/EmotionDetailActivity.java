@@ -3,6 +3,8 @@ package com.example.cugcsc;
 import static com.example.cugcsc.UserCenter.get.GetComment.getcomment;
 import static com.example.cugcsc.UserCenter.get.GetLostAndFound.GetLostFound;
 import static com.example.cugcsc.UserCenter.post.BasicApi.AddNums.addVisitNums;
+import static com.example.cugcsc.UserCenter.post.BasicApi.AddRealation.postComment;
+import static com.example.cugcsc.tool.GetImageByURL.getURLimage;
 import static com.example.cugcsc.tool.toast.ErrorToast;
 import static com.example.cugcsc.tool.toast.SuccessToast;
 
@@ -41,9 +43,11 @@ import com.google.android.material.button.MaterialButtonToggleGroup;
 
 import java.io.ByteArrayOutputStream;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -68,6 +72,7 @@ public class EmotionDetailActivity extends AppCompatActivity  implements View.On
         name=findViewById(R.id.user_name);
         comment=findViewById(R.id.comment_context);
         post=findViewById(R.id.post_comment);
+        post.setOnClickListener(this);
         /**********接受从列表传输过来的数据************/
         Intent i=getIntent();
         title.setText(i.getStringExtra("title"));
@@ -114,6 +119,9 @@ public class EmotionDetailActivity extends AppCompatActivity  implements View.On
             }
             handler.sendEmptyMessage(1);//通知主线程更新控件
         }).start();
+        new Thread(() -> {//获取头像
+            GlobalUserState.Head=getURLimage(GlobalUserState.URL);
+        }).start();
     }
 
     class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHoder> {
@@ -141,11 +149,12 @@ public class EmotionDetailActivity extends AppCompatActivity  implements View.On
             @SuppressLint("SimpleDateFormat") DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
             holder.date.setText(format.format(news.date));
             holder.content.setText(news.content);
+            holder.level.setText("楼层："+String.valueOf(news.level));
             //单击事件
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {//条目点击时间
-                    //Toast.makeText(context, "click" + position, Toast.LENGTH_SHORT).show();*/
+
                 }
             });
         }
@@ -159,12 +168,14 @@ public class EmotionDetailActivity extends AppCompatActivity  implements View.On
             ImageView head;
             TextView content;
             TextView date;
+            TextView level;
             public MyViewHoder(@NonNull View itemView) {
                 super(itemView);
                 name = itemView.findViewById(R.id.name);
                 head=itemView.findViewById(R.id.head);
                 date=itemView.findViewById(R.id.post_time);
                 content=itemView.findViewById(R.id.content);
+                level=itemView.findViewById(R.id.level);
             }
         }
         @Override
@@ -172,7 +183,13 @@ public class EmotionDetailActivity extends AppCompatActivity  implements View.On
             System.out.println(mlist.size());
             return mlist.size();
         }
-
+        //  添加数据
+        public void addData(int position,Comment temp) {
+        //  在list中添加数据，并通知条目加入一条
+            mlist.add(position, temp);
+            //添加动画
+            notifyItemInserted(position);
+        }
     }
     //handler为线程之间通信的桥梁
     @SuppressLint("HandlerLeak")
@@ -225,8 +242,37 @@ public class EmotionDetailActivity extends AppCompatActivity  implements View.On
                 if(Objects.equals(GlobalUserState.UserPhone, "")){
                     ErrorToast(this,"您尚未登录，请登录");
                 }else{
+                    /*********修改ui控件*********************/
+                    Comment temp=new Comment();
+                    temp.level=mlist.size()+1;
+                    temp.date=new Timestamp(new Date().getTime());
+                    temp.content=comment.getText().toString();
+                    temp.head=GlobalUserState.Head;
+                    temp.name=GlobalUserState.UserName;
+                    mMyAdapter.addData(mlist.size(),temp);//发布评论
                     comment.setText("");//清空评论栏
                     SuccessToast(this,"评论成功");
+                    /*********向数据库插入数据**************/
+                    String table="";
+                    if(PostType.type==1){
+                        table="school";
+                    }else if(PostType.type==2){
+                        table="emotion";
+                    }else if(PostType.type==3){
+                        table="interets";
+                    }else if(PostType.type==4){
+                        table="study";
+                    }
+                    String finalTable = table;
+                    new Thread(() -> {
+                        try {
+                            postComment(finalTable,comment.getText().toString(),GlobalUserState.UserPhone,mlist.size(),id);
+                        } catch (SQLException | ClassNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                        handler.sendEmptyMessage(1);//通知主线程更新控件
+                    }).start();
+
                 }
             }
         }

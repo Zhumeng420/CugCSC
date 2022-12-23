@@ -107,26 +107,26 @@
             android:textColorHint="@color/gray"
             android:textSize="16sp"
             tools:ignore="TextFields" />
+
         <ImageView
             android:layout_width="80px"
             android:layout_height="80px"
-            android:src="@drawable/password"
-            android:padding="15px"
-            android:layout_alignBottom="@id/user_password"
-            android:layout_alignLeft="@id/user_password"
             android:layout_alignStart="@id/user_password"
+            android:layout_alignLeft="@id/user_password"
             android:layout_alignTop="@id/user_password"
-            />
+            android:layout_alignBottom="@id/user_password"
+            android:padding="15px"
+            android:src="@drawable/password" />
+
         <ImageView
             android:id="@+id/see_pass"
             android:layout_width="80px"
             android:layout_height="80px"
-            android:src="@drawable/seepas"
-            android:padding="15px"
-            android:layout_alignBottom="@id/user_password"
-            android:layout_alignEnd="@id/user_password"
             android:layout_alignTop="@id/user_password"
-            />
+            android:layout_alignEnd="@id/user_password"
+            android:layout_alignBottom="@id/user_password"
+            android:padding="15px"
+            android:src="@drawable/seepas" />
     </RelativeLayout>
 
     <RelativeLayout

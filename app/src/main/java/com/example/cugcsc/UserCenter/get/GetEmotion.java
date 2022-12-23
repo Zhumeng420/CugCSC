@@ -25,7 +25,7 @@ public class GetEmotion {
             EmoData temp=new EmoData();
             temp.title = rs.getString("title");
             temp.content= rs.getString("content");
-            temp.post_time=rs.getDate("post_time");
+            temp.post_time=rs.getTimestamp("post_time");
             temp.visit_nums=rs.getInt("visit_nums");
             temp.name=GetName(rs.getString("phone"));
             temp.head=getURLimage(GetHeadURL(rs.getString("phone")));
