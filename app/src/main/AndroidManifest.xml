@@ -24,6 +24,9 @@
         android:theme="@style/Theme.CugCSC"
         tools:targetApi="31">
         <activity
+            android:name=".WebShowActivity"
+            android:exported="false" />
+        <activity
             android:name=".BookShowActivity"
             android:exported="false" />
         <activity
