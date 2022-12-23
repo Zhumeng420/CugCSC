@@ -80,7 +80,6 @@ public class BookShowActivity extends AppCompatActivity {
             MyAdapter.MyViewHoder myViewHoder = new MyAdapter.MyViewHoder(view);
             return myViewHoder;
         }
-
         @Override
         public void onBindViewHolder(@NonNull MyAdapter.MyViewHoder holder, @SuppressLint("RecyclerView") int position) {
             Book news =mList.get(position);

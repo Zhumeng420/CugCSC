@@ -1,5 +1,7 @@
 package com.example.cugcsc;
 
+import static com.example.cugcsc.tool.toast.WarnToast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -19,6 +21,9 @@ public class LibraryActivity extends AppCompatActivity  implements  View.OnClick
     private CardView MusicCenter;
     private CardView MovieCenter;
     private CardView BookCard;
+    private CardView CodeCenter;
+    private CardView DataCenter;
+    private CardView PaperCenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +76,12 @@ public class LibraryActivity extends AppCompatActivity  implements  View.OnClick
         MovieCenter.setOnClickListener(this);
         BookCard=findViewById(R.id.book_card);
         BookCard.setOnClickListener(this);
+        CodeCenter=findViewById(R.id.code_center);
+        CodeCenter.setOnClickListener(this);
+        DataCenter=findViewById(R.id.data_center);
+        DataCenter.setOnClickListener(this);
+        PaperCenter=findViewById(R.id.paper_center);
+        PaperCenter.setOnClickListener(this);
     }
 
     @Override
@@ -88,6 +99,15 @@ public class LibraryActivity extends AppCompatActivity  implements  View.OnClick
             }case R.id.book_card:{
                 startActivity(new Intent(getApplicationContext(),BookShowActivity.class));
                 overridePendingTransition(0,0);
+                break;
+            }case R.id.code_center:{
+                WarnToast(this,"尚未开放，敬请期待");
+                break;
+            } case R.id.data_center:{
+                WarnToast(this,"尚未开放，敬请期待");
+                break;
+            } case R.id.paper_center:{
+                WarnToast(this,"尚未开放，敬请期待");
                 break;
             }
         }

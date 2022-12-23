@@ -1,6 +1,7 @@
 package com.example.cugcsc;
 
 import static com.example.cugcsc.UserCenter.get.GetLostAndFound.GetLostFound;
+import static com.example.cugcsc.UserCenter.get.GetLostAndFound.SearchLostFound;
 import static com.example.cugcsc.tool.toast.ErrorToast;
 import static com.example.cugcsc.tool.toast.ItemToast;
 
@@ -24,6 +25,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -31,24 +33,38 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cugcsc.data.LostAndFoundData;
+import com.example.cugcsc.data.SearchKey;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LostFoundShowActivity extends AppCompatActivity {
+public class LostFoundShowActivity extends AppCompatActivity implements  View.OnClickListener {
     private RecyclerView LostList;
     private List<LostAndFoundData> mlist=new ArrayList<>();
+    private Button serach;
+    private EditText key;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lost_found_show);
+        /*******绑定搜索按钮*******/
+        serach=findViewById(R.id.search_button);
+        serach.setOnClickListener(this);
+        key=findViewById(R.id.search_context);
         /********搜索按钮更改字体*********/
         Button SearchButton=findViewById(R.id.search_button);
         Typeface type = Typeface.createFromAsset(getAssets(),"search.otf" );//设置按钮字体
         SearchButton.setTypeface(type);
         /*******获取失物招领列表********/
-        getRsource();
+        if(SearchKey.flag){//如果是搜索则部分加载
+            getSearch();
+            key.setText(SearchKey.key);
+        }else{//否则全部加载
+            getRsource();
+        }
+        /*****关闭搜索状态*****/
+        SearchKey.flag=false;
     }
 
     private void getRsource(){
@@ -63,7 +79,18 @@ public class LostFoundShowActivity extends AppCompatActivity {
             handler.sendEmptyMessage(1);//通知主线程更新控件
         }).start();
     }
-
+    private void getSearch(){
+        new Thread(() -> {
+            try {
+                SearchLostFound(mlist,SearchKey.key);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            handler.sendEmptyMessage(1);//通知主线程更新控件
+        }).start();
+    }
     //handler为线程之间通信的桥梁
     @SuppressLint("HandlerLeak")
     private Handler handler = new Handler(){
@@ -96,6 +123,20 @@ public class LostFoundShowActivity extends AppCompatActivity {
             }
         }
     };
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.search_button:{
+                /*****设置搜索状态*********/
+                SearchKey.key=key.getText().toString();
+                SearchKey.flag=true;
+                /****跳转********/
+                startActivity(new Intent(getApplicationContext(), LostFoundShowActivity.class));
+                overridePendingTransition(0,0);
+            }
+        }
+    }
 
 
     class  Mydecoration extends  RecyclerView.ItemDecoration{

@@ -131,7 +131,7 @@
             android:textColor="#353535"
             android:textSize="14sp" />
         <androidx.cardview.widget.CardView
-            android:id="@+id/emotion"
+            android:id="@+id/code_center"
             android:layout_width="45dp"
             android:layout_height="45dp"
             app:cardCornerRadius="10dp"
@@ -158,7 +158,7 @@
             />
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/interest"
+            android:id="@+id/data_center"
             android:layout_width="45dp"
             android:layout_height="45dp"
             app:cardCornerRadius="10dp"
@@ -184,7 +184,7 @@
             android:layout_marginTop="140dp"
             />
         <androidx.cardview.widget.CardView
-            android:id="@+id/interest2"
+            android:id="@+id/paper_center"
             android:layout_width="45dp"
             android:layout_height="45dp"
             app:cardCornerRadius="10dp"
