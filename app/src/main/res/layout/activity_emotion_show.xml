@@ -18,6 +18,7 @@
         android:background="@drawable/color_top"
         android:clickable="true"
         >
+
         <EditText
             android:id="@+id/search_context"
             android:layout_width="280dp"

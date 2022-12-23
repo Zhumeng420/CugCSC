@@ -1,6 +1,8 @@
 package com.example.cugcsc;
 
 import static com.example.cugcsc.UserCenter.get.GetEmotion.getEmotion;
+import static com.example.cugcsc.UserCenter.get.GetEmotion.getEmotionSearch;
+import static com.example.cugcsc.UserCenter.get.GetLostAndFound.SearchLostFound;
 import static com.example.cugcsc.UserCenter.post.BasicApi.AddNums.addVisitNums;
 
 import androidx.annotation.NonNull;
@@ -19,11 +21,14 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.cugcsc.data.EmoData;
 import com.example.cugcsc.data.PostType;
+import com.example.cugcsc.data.SearchKey;
 import com.example.cugcsc.data.Temp;
 
 import java.io.ByteArrayInputStream;
@@ -34,14 +39,20 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmotionShowActivity extends AppCompatActivity {
+public class EmotionShowActivity extends AppCompatActivity  implements  View.OnClickListener{
     private RecyclerView mRecyclerView;
     private MyAdapter mMyAdapter ;
     private List<EmoData> mList=new ArrayList<>();
+    private EditText SearchContext;
+    private Button SearchButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emotion_show);
+        /*********绑定控件***********/
+        SearchContext=findViewById(R.id.search_context);
+        SearchButton=findViewById(R.id.search_button);
+        SearchButton.setOnClickListener(this);
         /*********设置横向列表**********/
         mRecyclerView = findViewById(R.id.emotion_list);
         //设置垂直布局
@@ -53,53 +64,64 @@ public class EmotionShowActivity extends AppCompatActivity {
                 DividerItemDecoration(this,DividerItemDecoration.VERTICAL);
         mRecyclerView.addItemDecoration(mDivider);
         /********读取数据***********/
+        String table="";//首先要确定是哪个表
         if(PostType.type==1){
-            new Thread(() -> {
-                try {
-                    getEmotion(mList,"school");
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
-                handler.sendEmptyMessage(1);//通知主线程更新控件
-            }).start();
+            table="school";
         }else if(PostType.type==2){
-            new Thread(() -> {
-                try {
-                    getEmotion(mList,"emotion");
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
-                handler.sendEmptyMessage(1);//通知主线程更新控件
-            }).start();
+            table="emotion";
         }else if(PostType.type==3){
-            new Thread(() -> {
-                try {
-                    getEmotion(mList,"interest");
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
-                handler.sendEmptyMessage(1);//通知主线程更新控件
-            }).start();
+            table="interest";
         }else if(PostType.type==4){
-            new Thread(() -> {
-                try {
-                    getEmotion(mList,"study");
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
-                handler.sendEmptyMessage(1);//通知主线程更新控件
-            }).start();
+            table="study";
         }
-
+        if(SearchKey.flag){
+            getSearch(table);
+            SearchContext.setText(SearchKey.key);
+        }else{
+            GetData(table);
+            SearchKey.flag=false;
+        }
     }
+    private void GetData(String table){
+        new Thread(() -> {
+            try {
+                getEmotion(mList,table);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            handler.sendEmptyMessage(1);//通知主线程更新控件
+        }).start();
+    }
+    private void getSearch(String table){
+        new Thread(() -> {
+            try {
+                getEmotionSearch(mList, table,SearchKey.key);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            handler.sendEmptyMessage(1);//通知主线程更新控件
+        }).start();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.search_button:{
+                /*****设置搜索状态*********/
+                SearchKey.key=SearchContext.getText().toString();
+                System.out.println(SearchKey.key);
+                SearchKey.flag=true;
+                /****跳转********/
+                startActivity(new Intent(getApplicationContext(),EmotionShowActivity.class));
+                overridePendingTransition(0,0);
+            }
+        }
+    }
+
     class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHoder> {
         private Context context;
         private List<EmoData> data;
@@ -137,7 +159,7 @@ public class EmotionShowActivity extends AppCompatActivity {
                     }else if(PostType.type==2){
                         table="emotion";
                     }else if(PostType.type==3){
-                        table="interets";
+                        table="interest";
                     }else if(PostType.type==4){
                         table="study";
                     }
