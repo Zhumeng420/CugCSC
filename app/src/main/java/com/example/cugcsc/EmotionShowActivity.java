@@ -79,8 +79,8 @@ public class EmotionShowActivity extends AppCompatActivity  implements  View.OnC
             SearchContext.setText(SearchKey.key);
         }else{
             GetData(table);
-            SearchKey.flag=false;
         }
+        SearchKey.flag=false;
     }
     private void GetData(String table){
         new Thread(() -> {

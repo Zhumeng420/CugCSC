@@ -4,7 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MessageActivity">
+    tools:context=".MessageActivity"
+    android:background="@drawable/background1">
+    <RelativeLayout
+        android:id="@+id/serach_view2"
+        android:layout_width="330dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/edittext_shape01"
+        android:clickable="true"
+        android:layout_marginHorizontal="@android:dimen/app_icon_size"
+        >
+
+        <TextView
+            android:id="@+id/notice"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="🌟🌟🌟中国地质大学（武汉）校园综合服务平台祝大家圣诞节快乐！💝💝💝"
+            android:textColor="#353535"
+            android:textSize="22sp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            >
+        </TextView>
+
+    </RelativeLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/botton_navigation"
         android:layout_width="match_parent"
