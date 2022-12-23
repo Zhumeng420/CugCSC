@@ -54,7 +54,7 @@
         android:clickable="true"
         android:layout_marginHorizontal="@android:dimen/app_icon_size">
         <androidx.cardview.widget.CardView
-            android:id="@+id/study_card"
+            android:id="@+id/book_card"
             android:layout_width="45dp"
             android:layout_height="45dp"
             app:cardCornerRadius="10dp"
@@ -63,7 +63,7 @@
             android:layout_marginStart="35dp"
             android:paddingBottom="15dp">
             <ImageView
-                android:id="@+id/study_center"
+                android:id="@+id/book_center"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_marginLeft="0dp"

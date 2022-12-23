@@ -40,6 +40,7 @@ import com.example.cugcsc.data.Comment;
 import com.example.cugcsc.data.EmoData;
 import com.example.cugcsc.data.LostAndFoundData;
 import com.example.cugcsc.data.PostType;
+import com.example.cugcsc.data.Temp;
 import com.google.android.material.button.MaterialButtonToggleGroup;
 
 import java.io.ByteArrayOutputStream;
@@ -78,8 +79,9 @@ public class EmotionDetailActivity extends AppCompatActivity  implements View.On
         Intent i=getIntent();
         title.setText(i.getStringExtra("title"));
         name.setText(i.getStringExtra("name"));
-        buff=i.getByteArrayExtra("head");
-        head.setImageBitmap(BitmapFactory.decodeByteArray(buff,0, buff.length));
+        //buff=i.getByteArrayExtra("head");
+        //head.setImageBitmap(BitmapFactory.decodeByteArray(buff,0, buff.length));
+        head.setImageBitmap(Temp.temphead);
         id=i.getIntExtra("id",id);
         final String dataStr=i.getStringExtra("diarys");
         /********初始化webview********/

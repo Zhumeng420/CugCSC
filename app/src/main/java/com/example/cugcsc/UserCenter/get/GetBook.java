@@ -5,7 +5,8 @@ import static com.example.cugcsc.UserCenter.get.GetHeadOrNameByPhone.GetName;
 import static com.example.cugcsc.database.DbConnector.getConnection;
 import static com.example.cugcsc.tool.GetImageByURL.getURLimage;
 
-import com.example.cugcsc.data.Comment;
+import com.example.cugcsc.data.Book;
+import com.example.cugcsc.data.EmoData;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -13,20 +14,18 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-public class GetComment {
-    public static Boolean  getcomment(List<Comment> result, String table,String id) throws SQLException, ClassNotFoundException {
+public class GetBook {
+    public static Boolean  getBook(List<Book> result) throws SQLException, ClassNotFoundException {
         Connection conn = getConnection();
         Statement stmt = conn.createStatement();
-        String sql = "select * from comment where which_table='"+table+"' and source_id="+id;
+        String sql = "select * from book";
         ResultSet rs = stmt.executeQuery(sql);
         //rs.beforeFirst();
         while(rs.next()){
-            Comment temp=new Comment();
-            temp.name=GetName(rs.getString("phone"));
-            temp.head=getURLimage(GetHeadURL(rs.getString("phone")));
-            temp.date=rs.getTimestamp("time");
-            temp.content=rs.getString("context");
-            temp.level=rs.getInt("which_level");
+            Book temp=new Book();
+            temp.title = rs.getString("title");
+            temp.author=rs.getString("author");
+            temp.url=rs.getString("url");
             result.add(temp);
         }
         rs.close();
