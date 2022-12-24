@@ -66,6 +66,16 @@ public class MusicPlayActivity extends AppCompatActivity implements View.OnClick
             new BasicThreadFactory.Builder().namingPattern("example-schedule-pool-%d")
                     .daemon(true).build());
     @Override
+    protected void onDestroy() {
+        if (mediaPlayer.isPlaying()) {
+            mediaPlayer.pause();
+            btnPlay.setText("继续");
+            MusicPicture.clearAnimation();
+            mLrcView.pause();//歌词暂停
+        }
+        super.onDestroy();
+    }
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_music_play);
@@ -107,7 +117,6 @@ public class MusicPlayActivity extends AppCompatActivity implements View.OnClick
                     /*******音乐开始播放*********/
                     play();
                     btnPlay.setText("暂停");
-
                     mLrcView.resume();//歌词继续
                 }
             }
