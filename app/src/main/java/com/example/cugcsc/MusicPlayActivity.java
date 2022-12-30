@@ -1,7 +1,5 @@
 package com.example.cugcsc;
 
-
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
@@ -48,8 +46,8 @@ public class MusicPlayActivity extends AppCompatActivity implements View.OnClick
     private Timer timer = new Timer(); // 计时器
     private boolean isPrepare = false;
     private SeekBar seekBar;
-    private static  String PATH = "http://81.70.13.188:9000/cugsdn/平行恋人 (女版)-刘至佳_1671458082656.mp3";
-    private static  String PATH2 = "http://81.70.13.188:9000/cugsdn/平行恋人 (女版)-刘至佳_1671541207394.lrc";
+    private static  String PATH = "";
+    private static  String PATH2 = "";
 
     private TextView tvCurrent;
     private TextView tvDuration;

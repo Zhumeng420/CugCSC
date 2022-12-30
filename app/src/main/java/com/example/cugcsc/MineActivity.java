@@ -36,6 +36,7 @@ import android.widget.Toast;
 
 import com.example.cugcsc.UserCenter.GetHeadByAsyc;
 import com.example.cugcsc.UserCenter.GlobalUserState;
+import com.example.cugcsc.tool.FileoOperations;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -44,6 +45,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.Objects;
+import java.io.RandomAccessFile;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class MineActivity extends AppCompatActivity implements View.OnClickListener {
     private RelativeLayout UserInfo;
@@ -186,7 +190,11 @@ public class MineActivity extends AppCompatActivity implements View.OnClickListe
                     builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            File file = new File("/storage/emulated/0/cugcsc/user.txt");
+                            FileoOperations.verifyStoragePermissions(MineActivity.this);
+                            String path=MineActivity.this.getExternalCacheDir().getAbsolutePath();
+                            System.out.println(path);
+                            path=path+"/cugcsc/user.txt";
+                            File file = new File(path);
                             if(file.exists() && file.isFile())//删除本地记录
                             {
                                 file.delete();

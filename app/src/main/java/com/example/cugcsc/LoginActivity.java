@@ -98,11 +98,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
                 /********单点登录，将登录信息记录到本地*******************/
                 FileoOperations.verifyStoragePermissions(LoginActivity.this);
-                if(!FileoOperations.isFolderExists("/storage/emulated/0/cugcsc")){
-                    FileoOperations.makeDirectory("/storage/emulated/0/cugcsc");//创建文件夹
+                String path=this.getExternalCacheDir().getAbsolutePath();
+                System.out.println(path);
+                path=path+"/cugcsc";
+                if(!FileoOperations.isFolderExists(path)){
+                    FileoOperations.makeDirectory(path);//创建文件夹
                 }
                 //判断文件是否存在
-                File file = new File("/storage/emulated/0/cugcsc/user.txt");
+                File file = new File( path+"/user.txt");
                 if(file.exists() && file.isFile())
                 {
                     file.delete();

@@ -99,11 +99,14 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         InterestCenter=findViewById(R.id.interest_center);
         InterestCenter.setOnClickListener(this);
         /********单点登录************/
-        if(!FileoOperations.isFolderExists("/storage/emulated/0/cugcsc")){
-            FileoOperations.makeDirectory("/storage/emulated/0/cugcsc");//创建文件夹
+        String path=MainActivity.this.getExternalCacheDir().getAbsolutePath();
+        System.out.println(path);
+        if(!FileoOperations.isFolderExists(path)){
+            FileoOperations.makeDirectory(path);//创建文件夹
         }
         //判断文件是否存在
-        File file = new File("/storage/emulated/0/cugcsc/user.txt");
+        path=path+"/cugcsc/user.txt";
+        File file = new File(path);
         ArrayList info=new ArrayList<String>();//读取账号密码信息
         if(file.exists() && file.isFile())//如果本地有记录，则直接登录
         {
